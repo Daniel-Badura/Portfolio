@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widoczki</title>
+</head>
+
+<body>
+
+    <h1> Dodaj nowy Widok</h1>
+    <form action="/widoczki" method="POST">
+            <div>
+                <label for="name">Nazwa</label>
+                <input type="text" id="name" name="widoczek[name]">
+            </div>
+            <div>
+                <label for="location">Lokalizacja</label>
+                <input type="text" id="location" name="widoczek[location]">
+            </div>
+            <button>Dodaj Widoczek</button>   
+    </form>
+
+    <footer>
+        <a href="/widoczki">Pokaż wszystkie widoczki</a>
+    </footer>
+
+</body>
+
+</html>
