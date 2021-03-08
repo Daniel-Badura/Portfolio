@@ -3,6 +3,9 @@ const {miejsce, opis} = require('./seedWidoczki');
 const Widoczek = require('../models/Widoczek');
 const cities = require('./cities');
 const widoczek = require('../models/Widoczek');
+const loremIpsum = require("lorem-ipsum").loremIpsum;
+
+
 
 mongoose.connect('mongodb://localhost:27017/portfolio', {
     useNewUrlParser: true,
@@ -22,7 +25,10 @@ const seedDB = async () => {
         const losoweMiasto = Math.floor(Math.random() * 940);
         const widoczek = new Widoczek({
             location: `${cities[losoweMiasto].name}, ${cities[losoweMiasto].province}`,
-            name: `${generatorNazw(opis)} ${generatorNazw(miejsce)}`
+            image: "https://source.unsplash.com/collection/2179487/800x600",
+            name: `${generatorNazw(opis)} ${generatorNazw(miejsce)}`,
+            description: `${loremIpsum({count: 10})}`,
+            price: `${Math.floor(Math.random()*15+5)}`
         })
         await widoczek.save();
     }
@@ -31,4 +37,6 @@ const seedDB = async () => {
 
 }
 
-seedDB();
+seedDB().then(()=>{
+    mongoose.connection.close()
+});

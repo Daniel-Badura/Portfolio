@@ -3,10 +3,25 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const Widoczek = require('./models/Widoczek');
-const {opis, miejsce} = require('./seeds/seedWidoczki');
+// const { opis, miejsce } = require('./seeds/seedWidoczki');
 const methodOverride = require('method-override');
+const morgan = require("morgan");
+const ejsMate = require("ejs-mate");
+const catchAsync = require('./utils/catchAsync');
+const ExpressError = require('./utils/ExpressError');
+const Joi = require('joi');
+const {widoczkiSchema} = require("./schemas.js");
 
-
+//  -------- Joi Schema Validation ----------
+const valitateWidoczki = (req, res, next) => {
+    const {error} = widoczkiSchema.validate(req.body);
+    if (error) {
+        const message = error.details.map(el => el.message).join(',')
+        throw new ExpressError(message, 400)
+    } else {
+        next();
+    }
+}
 // ------------ CONNECT MONGOOSE ----------------------
 mongoose.connect('mongodb://localhost:27017/portfolio', {
     useNewUrlParser: true,
@@ -20,59 +35,74 @@ db.once('open', () => {
 });
 // ------------ EXPRESS SETUP -------------------------
 const app = express();
-app.use(express.urlencoded({extend:true}));
+app.use(express.urlencoded({ extend: true }));
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+// ----------------------------------------------------
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('portfolio');
 });
+// ------------ MORGAN --------------------------------
+app.use(morgan('common'))
 // ------------ METHOD OVERRIDE -----------------------
 app.use(methodOverride('_method'))
 // ------------ INDEX ---------------------------------
-app.get('/widoczki', async (req, res) => {
+app.get('/widoczki', catchAsync(async (req, res) => {
     const widoczki = await Widoczek.find({});
-    res.render('widoczki/index', {widoczki});
-});
+    res.render('widoczki/index', { widoczki });
+}));
+// ------------ HOME ---------------------------------
+app.get('/widoczki/home', catchAsync(async (req, res) => {
+    res.render('widoczki/home')
+}));
 // ---------------------------------------- CRUD SECTION -------------------------------------------------
 // ------------ NEW -----------------------------------
-app.get('/widoczki/new', async (req, res) => {
+app.get('/widoczki/new', catchAsync(async (req, res) => {
     const widoczki = await Widoczek.find({});
-    res.render('widoczki/new', {widoczki});
-});
+    res.render('widoczki/new', { widoczki });
+
+}));
 // ------------ POST NEW-------------------------------
-app.post('/widoczki', async (req, res) => {
-   const widoczek = new Widoczek(req.body.widoczek);
-   await widoczek.save();
-   res.redirect(`/widoczki/${widoczek._id}`);
-})
-// ------------ SHOW ----------------------------------
-app.get('/widoczki/:id', async (req, res) => {
-    const widoczek = await Widoczek.findById(req.params.id);
-    res.render('widoczki/show', {widoczek});
-});
-// ------------ EDIT ----------------------------------
-app.get('/widoczki/:id/edit', async (req, res) => {
-    const widoczek = await Widoczek.findById(req.params.id);
-    res.render('widoczki/edit', {widoczek});
-});
-// ------------ EDIT PUT -----------------------------
-app.put('/widoczki/:id', async (req, res) => {
-    const { id } = req.params;
-    const widoczek = await Widoczek.findByIdAndUpdate(id, {...req.body.widoczek});
+app.post('/widoczki', valitateWidoczki, catchAsync(async (req, res) => {
+    // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
+    const widoczek = new Widoczek(req.body.widoczek);
+    await widoczek.save();
     res.redirect(`/widoczki/${widoczek._id}`);
-})
+}));
+// ------------ SHOW ----------------------------------
+app.get('/widoczki/:id', catchAsync(async (req, res) => {
+    const widoczek = await Widoczek.findById(req.params.id);
+    res.render('widoczki/show', { widoczek });
+}));
+// ------------ EDIT ----------------------------------
+app.get('/widoczki/:id/edit', catchAsync(async (req, res) => {
+    const widoczek = await Widoczek.findById(req.params.id);
+    res.render('widoczki/edit', { widoczek });
+}));
+// ------------ EDIT PUT -----------------------------
+app.put('/widoczki/:id', valitateWidoczki, catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const widoczek = await Widoczek.findByIdAndUpdate(id, { ...req.body.widoczek });
+    res.redirect(`/widoczki/${widoczek._id}`);
+}));
 // ------------ DELETE -----------------------------
-app.delete('/widoczki/:id', async (req, res) => {
+app.delete('/widoczki/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const widoczek = await Widoczek.findByIdAndDelete(id);
     res.redirect('/widoczki/');
-})
-
-
-
-
+}));
+// ------------------EXPRESS ERROR-------------------------------------
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404));
+});
+// ----------------NEXT-------------------------------
+app.use((err, req, res, next) => {
+    const { statusCode = 500, message = 'Kurka wodna...' } = err;
+    res.status(statusCode).render('error', { err });
+});
 // ------------ APP START -----------------------------
 app.listen(3000, () => {
-    console.log('Started on port 3000')
+    console.log('Started on port 3000');
 });
 

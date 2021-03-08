@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widoczki</title>
-</head>
-<body>
-    <h1>  <%= widoczek.name %></h1>
-    <h2>  <%= widoczek.location %></h2>
-
-    <p></p>
-
-    <form action="/widoczki/<%=widoczek._id%>?_method=DELETE" method="POST">
-        <button>Usuń Widoczek</button>
-    </form>
-
-    <a href="/widoczki/<%= widoczek._id %>/edit">Edytuj Widoczek</a>
-    <footer>
-        <a href="/widoczki">Pokaż wszystkie widoczki</a>
-    </footer>
-    
-</body>
-</html>
+<% layout('layouts/boilerplateWidoczki') %>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card" >
+                <img src="<%= widoczek.image %>" class="card-img-top"
+                    alt="/img/default.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= widoczek.name %>
+                    </h5>
+                    <p class="card-text">
+                        <%= widoczek.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <%= widoczek.location %>
+                    </li>
+                    <li class="list-group-item">
+                        <%= widoczek.price %> € za jedno spojrzenie
+                    </li>
+                    <li class="list-group-item">
+                      
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <a class="card-link btn btn-info" href="/widoczki/<%= widoczek._id %>/edit">Edytuj Widoczek</a>
+                    <form class="d-inline" action="/widoczki/<%=widoczek._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger ">Usuń Widoczek</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

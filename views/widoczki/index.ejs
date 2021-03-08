@@ -1,23 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widoczki</title>
-</head>
-<body>
+<% layout('layouts/boilerplateWidoczki') %>
 
-    <h1> Wszystkie Widoczki</h1>
+        <h1> Wszystkie Widoczki</h1>
 
-    <div>
-        <a href="/widoczki/new">Dodaj Widoczek</a>
-    </div>
-    <ul>
+        <div>
+            <!-- <a href="/widoczki/new">Dodaj Widoczek</a> -->
+        </div>
+
         <% for (let widoczek of widoczki) {%>
-        <li><a href="/widoczki/<%= widoczek._id %>"><%= widoczek.name %></a></li>
-        <% }%>
-    </ul>
-    
-</body>
-</html>
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" style=" height: 300px;
+                        height: auto;" src="<%= widoczek.image %>">
+
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= widoczek.name %>
+                            </h5>
+                            <p class="card-text">
+                                <%= widoczek.description %>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= widoczek.location %>
+                                </small>
+                            </p>
+                            <a class="btn btn-primary" href="/widoczki/<%= widoczek._id %>">Przejdź do <%= widoczek.name
+                                    %></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }%>

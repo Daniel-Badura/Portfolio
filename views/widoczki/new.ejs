@@ -1,32 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplateWidoczki') %>
+    <div class="row">
+        <h1 class="text-center">
+            Nowy widoczek
+        </h1>
+        <div class="col-6 offset-3">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widoczki</title>
-</head>
+            <h1> Dodaj nowy Widok</h1>
+            <form action="/widoczki" method="POST" novalidate class="validated-form">
+                <!-- NAZWA -->
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nazwa</label>
+                    <input class="form-control" type="text" id="name" name="widoczek[name]" required>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <div class="valid-feedback green">
+                    Dobrze!
+                </div>
+                <!-- LOKALIZACJA -->
+                <div class="mb-3">
+                    <label class="form-label" for="location">Lokalizacja</label>
+                    <input class="form-control" type="text" id="location" name="widoczek[location]" required>
 
-<body>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- ADRES -->
+                <div class="mb-3">
+                    <label class="form-label" for="image">Adres obrazu</label>
+                    <input class="form-control" type="text" id="image" name="widoczek[image]" required>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- CENA -->
+                <div class="mb-3">
+                    <label class="form-label" for="price">Cena</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price">€</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="Cena"
+                            aria-describedby="price" name="widoczek[price]" required>
+                    </div>
+                </div>
+                <!-- OPIS -->
+                <div class="mb-3">
+                    <label class="form-label" for="description">Opis</label>
+                    <textarea class="form-control" type="text" id="description" name="widoczek[description]"
+                        required></textarea>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- PRZYCISK -->
+                <button class="btn btn-success">Dodaj Widoczek</button>
+            </form>
+            <p></p>
+            <a class="mb-3" href="/widoczki">Pokaż wszystkie widoczki</a>
 
-    <h1> Dodaj nowy Widok</h1>
-    <form action="/widoczki" method="POST">
-            <div>
-                <label for="name">Nazwa</label>
-                <input type="text" id="name" name="widoczek[name]">
-            </div>
-            <div>
-                <label for="location">Lokalizacja</label>
-                <input type="text" id="location" name="widoczek[location]">
-            </div>
-            <button>Dodaj Widoczek</button>   
-    </form>
 
-    <footer>
-        <a href="/widoczki">Pokaż wszystkie widoczki</a>
-    </footer>
+        </div>
+    </div>
 
-</body>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
 
-</html>
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>

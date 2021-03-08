@@ -1,28 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplateWidoczki') %>
+    <div class="row">
+        <h1 class="text-center">
+            Edytuj Widok
+        </h1>
+        <div class="col-6 offset-3">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widoczki</title>
-</head>
+            <h1> Edytuj Widok</h1>
+            <form action="/widoczki/<%= widoczek._id %>?_method=PUT" method="POST" novalidate class="validated-form">
+                <!-- NAZWA -->
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nazwa</label>
+                    <input class="form-control" type="text" id="name" name="widoczek[name]" value="<%= widoczek.name %>" required>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- LOKALIZACJA -->
+                <div class="mb-3">
+                    <label class="form-label" for="location">Lokalizacja</label>
+                    <input class="form-control" type="text" id="location" name="widoczek[location]" value="<%= widoczek.location %>" required>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- ADRES -->
+                <div class="mb-3">
+                    <label class="form-label" for="image">Adres obrazu</label>
+                    <input class="form-control" type="text" id="image" name="widoczek[image]" value="<%= widoczek.image %>" required>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- CENA -->
+                <div class="mb-3">
+                    <label class="form-label" for="price">Cena</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price">€</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="Cena"
+                            aria-describedby="price" name="widoczek[price]" value="<%= widoczek.price %>" required>
+                    </div>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- OPIS -->
+                <div class="mb-3">
+                    <label class="form-label" for="description">Opis</label>
+                    <textarea class="form-control" type="text" id="description" name="widoczek[description]" value="<%= widoczek.description %>" required></textarea>
+                    <div class="valid-feedback green">
+                        Dobrze!
+                    </div>
+                </div>
+                <!-- PRZYCISK -->
+                <button class="btn btn-success">Zatwierdź</button>
+            </form>
+            <p></p>
+            <a class="mb-3" href="/widoczki/<%= widoczek._id %>">Wróć do widoczku</a>
+        </div>
+    </div>
 
-<body>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
 
-    <h1> Edytuj Widok</h1>
-    <form action="/widoczki/<%= widoczek._id %>?_method=PUT" method="POST">
-            <div>
-                <label for="name">Nazwa</label>
-                <input type="text" id="name" name="widoczek[name]" value="<%= widoczek.name %>">
-            </div>
-            <div>
-                <label for="location">Lokalizacja</label>
-                <input type="text" id="location" name="widoczek[location]" value="<%= widoczek.location %>">
-            </div>
-            <button>Zatwierdź</button>   
-    </form>
-    <a href="/widoczki/<%= widoczek._id %>">Powrót do Widoczku</a>
-</body>
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.validated-form')
 
-</html>
+            // Loop over them and prevent submission
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
