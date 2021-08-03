@@ -1,0 +1,195 @@
+/* General */
+
+body {
+    font-family: 'Monsterrat', sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Monsterrat-Bold';
+    /* font-family: 'Dancing Script'; */
+    font-weight: 800;
+    font-size: 3vw;
+}
+/*  Color Sections */
+.colored-section {
+    background-color: #17ebb2;
+}
+
+.white-section {
+    background-color: white;
+}
+/* Title */
+
+#the-image {
+    border-radius: 20%;
+    height: 40vw;
+    transform: rotate(25deg);
+}
+
+#navbar {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+}
+
+.navbar-brand {
+    font-size: 3rem;
+}
+
+.main-description {
+    color: white;
+    font-family: 'Dancing Script';
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 1028px) {
+    #the-image {
+        position: static;
+        transform: rotate(0);
+    }
+}
+
+
+/* Features */
+
+#features {
+    color: #057456;
+    font-family: 'Monsterrat', sans-serif;
+}
+
+.feature-description {
+    color: gray;
+}
+
+.icon {
+    color: #17ebb2;
+    margin-bottom: 1rem;
+}
+
+.icon:hover {
+    color: rgb(133, 14, 230);
+    transform: scale(130%);
+    transition: 3s;
+}
+
+.container-fluid {
+    padding: 5% 15%;
+}
+
+/* Testimonials */
+
+#testimonials {
+    color: white;
+}
+
+.testimonial-image {
+    height: 200px;
+    width: 300px;
+    border-radius: 50%;
+}
+
+.testimonial-author {
+    padding-left: 2rem;
+}
+
+.testimonial-comment {
+    font-size: 2vw;
+}
+
+/* Press */
+
+.brand-logos {
+    width: 300px;
+    margin: 20px 20px 50px;
+}
+
+#brands {
+    padding-bottom: 5%;
+}
+
+/* Pricing */
+
+.pricing-plan {
+    font-family: 'Dancing Script';
+}
+
+#pricing {
+    font-family: 'Dancing Script';
+    padding: 5%;
+    font-weight: 800;
+    padding-bottom: 2rem;
+    font-size: 2vw;
+    color: #057456;
+}
+
+.pricing-cards {
+    font-family: 'Monsterrat', sans-serif;
+    font-size: 2rem;
+}
+
+.pricing-card-body {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.pricing-name {
+    font-family: 'Dancing Script';
+    font-weight: 800;
+    font-size: 3rem;
+    padding-top: 2rem;
+}
+
+.pricing-button {
+    margin-top: 2rem;
+    font-family: 'Pirata One', cursive;
+}
+
+.pricing-button:hover {
+    background-color: #17ebb2;
+}
+
+.pricing-card:hover {
+    background-color: #17ebb2;
+    transition: 2s;
+    transform: scale(110%);
+    z-index: 1;
+}
+
+/* Call To Action */
+
+#cta {
+    font-family: 'Monsterrat', sans-serif;
+    font-weight: 800;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-color: #057456;
+}
+
+.cta-text {
+    padding-bottom: 2rem;
+    font-family: 'Dancing Script';
+    font-size: 3rem;
+}
+
+/* Footer */
+
+#footer {
+    font-family: 'Monsterrat', sans-serif;
+}
+
+.footer-icons {
+    color: #057456;
+    padding: 1rem
+}
+
+#copyright {
+    padding-top: 1rem;
+    color: gray
+}
+
+#goBack {
+    color: #17ebb2
+}

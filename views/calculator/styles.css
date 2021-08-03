@@ -1,0 +1,79 @@
+.theTitle {
+  text-align: center;
+  padding-top: 10%;
+  font-size: 8rem;
+  font-family: 'Dancing Script';
+}
+
+.container-fluid {
+  
+  padding: 5% 15%;
+}
+
+body {
+  background-image: linear-gradient(to bottom right, rgb(213, 190, 232), rgb(194, 252, 165));
+  
+  text-align: center;
+  font-weight: 900;
+}
+
+.form-control {
+  height: 5rem;
+  font-size: 3rem;
+  font-weight: 900;
+  color:rgb(119, 0, 255);
+}
+
+.calc-button {
+  padding: 1rem;
+  /* border: solid 2px black; */
+  font-size: 2rem;
+  /* background-color: aquamarine; */
+  background-image: linear-gradient(to bottom right, red, yellow);
+}
+
+.calc-lower-button {
+  padding: 1rem;
+  /* border: solid 2px black; */
+  font-size: 2rem;
+  /* background-color: orange; */
+  background-image: linear-gradient(to bottom right, rgb(94, 11, 247), rgb(59, 226, 37));
+}
+
+.calc-display {
+  /* border: solid 5px black; */
+  font-size: 2rem;
+  /* background-color: blue; */
+  padding: 5% 5%;
+  background-image: linear-gradient(to bottom right, rgb(14, 241, 230), rgb(255, 0, 242));
+}
+
+/* #input {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+#output {
+  text-align: center;
+  font-size: 2rem;
+} */
+
+.calc-button-zero {
+  width: 50px;
+}
+
+.selected {
+  background-color: rgb(59, 235, 23);
+  background-image: linear-gradient(to bottom right, black,white);
+}
+
+.click {
+  /* border: solid 5px black; */
+  transition: 0.3s;
+}
+
+.clicked {
+  background-color: gray;
+  background-image: linear-gradient(to bottom right, white,gold);
+}

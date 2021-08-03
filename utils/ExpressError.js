@@ -1,3 +1,4 @@
+/*jshint esversion: 9 */
 class ExpressError extends Error {
     constructor(message, statusCode) {
         super();

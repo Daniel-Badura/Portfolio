@@ -1,0 +1,49 @@
+<% layout('layouts/boilerplateKeynotes') %>
+  <h1 id="title">🎧🎼🎹KeyNotes🎹🎶🎵</h1>
+  <div>
+
+    <ul class="set">
+      <li id="c" class="white c note">a</li>
+      <li id="cs" class="black ds note">w</li>
+      <li id="d" class="white d note">s</li>
+      <li id="ds" class="black cs note">e</li>
+      <li id="e" class="white c note">d</li>
+      <li id="f" class="white b note">j</li>
+      <li id="fs" class="black as note">i</li>
+      <li id="g" class="white a note">k</li>
+      <li id="gs" class="black gs note">o</li>
+      <li id="a" class="white g note">l</li>
+      <li id="as" class="black fs note">p</li>
+      <li id="b" class="white f note">;</li>
+    </ul>
+    <div class="volume">volume:
+      <input id="vol-control" class="form-range" type="range" min="0" max="100" step="1" value="20"></input>
+    </div>
+
+
+    <div>
+      <button class='btn btn-lg btn-outline-dark speed'>Normal</button>
+      <button class='btn btn-lg btn-outline-dark speed'>Fast</button>
+      <button class='btn btn-lg btn-outline-dark speed'>Faster</button>
+    </div>>
+
+  </div>
+  <div class="fluid">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+  <div class="scoreboard">
+    <h2 class='score'></h2>
+    <div class="play">
+      <button id="next-level" class='next-level btn btn-lg btn-outline-light hide control-button'>NEXT LEVEL</button>
+      <button id="play" class="btn btn-lg btn-outline-light control-button">PLAY</button>
+      <button id="record" class="btn btn-lg btn-outline-light record control-button">REC.</button>
+      <button id="stop" class="btn btn-lg btn-outline-light record control-button hide">STOP</button>
+      <button id="play-record" class="btn btn-lg btn-outline-light record control-button hide">PLAY REC.</button>
+    </div>
+  </div>
+
+  <footer>
+  </footer>

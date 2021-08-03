@@ -1,108 +1,156 @@
+/*jshint esversion: 9 */
+
 // ------------ DEPENDECIES ---------------------------
-const express = require('express');
-const path = require('path');
-const mongoose = require('mongoose');
-const Widoczek = require('./models/Widoczek');
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+const Widoczek = require("./models/Widoczek");
 // const { opis, miejsce } = require('./seeds/seedWidoczki');
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
 const morgan = require("morgan");
 const ejsMate = require("ejs-mate");
-const catchAsync = require('./utils/catchAsync');
-const ExpressError = require('./utils/ExpressError');
-const Joi = require('joi');
-const {widoczkiSchema} = require("./schemas.js");
+const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
+const Joi = require("joi");
+const { widoczkiSchema } = require("./schemas.js");
+const Calculator =require("./models/Calculator");
 
 //  -------- Joi Schema Validation ----------
 const valitateWidoczki = (req, res, next) => {
-    const {error} = widoczkiSchema.validate(req.body);
-    if (error) {
-        const message = error.details.map(el => el.message).join(',')
-        throw new ExpressError(message, 400)
-    } else {
-        next();
-    }
-}
+  const { error } = widoczkiSchema.validate(req.body);
+  if (error) {
+    const message = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(message, 400);
+  } else {
+    next();
+  }
+};
 // ------------ CONNECT MONGOOSE ----------------------
-mongoose.connect('mongodb://localhost:27017/portfolio', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
+mongoose.connect("mongodb://localhost:27017/portfolio", {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-    console.log('Database connected');
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+  console.log("Database connected");
 });
 // ------------ EXPRESS SETUP -------------------------
 const app = express();
+app.use('/public', express.static('public'));
 app.use(express.urlencoded({ extend: true }));
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 // ----------------------------------------------------
-app.get('/', (req, res) => {
-    res.render('portfolio');
+app.get("/", (req, res) => {
+  res.render("portfolio");
 });
 // ------------ MORGAN --------------------------------
-app.use(morgan('common'))
+app.use(morgan("common"));
 // ------------ METHOD OVERRIDE -----------------------
-app.use(methodOverride('_method'))
-// ------------ INDEX ---------------------------------
-app.get('/widoczki', catchAsync(async (req, res) => {
+app.use(methodOverride("_method"));
+// ------------ INDEX WIDOCZKI------------------------------------------------------------------------------------------------
+app.get(
+  "/widoczki",
+  catchAsync(async (req, res) => {
     const widoczki = await Widoczek.find({});
-    res.render('widoczki/index', { widoczki });
-}));
+    res.render("widoczki/index", { widoczki });
+  })
+);
 // ------------ HOME ---------------------------------
-app.get('/widoczki/home', catchAsync(async (req, res) => {
-    res.render('widoczki/home')
-}));
+app.get(
+  "/widoczki/home",
+  catchAsync(async (req, res) => {
+    res.render("widoczki/home");
+  })
+);
 // ---------------------------------------- CRUD SECTION -------------------------------------------------
 // ------------ NEW -----------------------------------
-app.get('/widoczki/new', catchAsync(async (req, res) => {
+app.get(
+  "/widoczki/new",
+  catchAsync(async (req, res) => {
     const widoczki = await Widoczek.find({});
-    res.render('widoczki/new', { widoczki });
-
-}));
+    res.render("widoczki/new", { widoczki });
+  })
+);
 // ------------ POST NEW-------------------------------
-app.post('/widoczki', valitateWidoczki, catchAsync(async (req, res) => {
+app.post(
+  "/widoczki",
+  valitateWidoczki,
+  catchAsync(async (req, res) => {
     // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
     const widoczek = new Widoczek(req.body.widoczek);
     await widoczek.save();
     res.redirect(`/widoczki/${widoczek._id}`);
-}));
+  })
+);
 // ------------ SHOW ----------------------------------
-app.get('/widoczki/:id', catchAsync(async (req, res) => {
+app.get(
+  "/widoczki/:id",
+  catchAsync(async (req, res) => {
     const widoczek = await Widoczek.findById(req.params.id);
-    res.render('widoczki/show', { widoczek });
-}));
+    res.render("widoczki/show", { widoczek });
+  })
+);
 // ------------ EDIT ----------------------------------
-app.get('/widoczki/:id/edit', catchAsync(async (req, res) => {
+app.get(
+  "/widoczki/:id/edit",
+  catchAsync(async (req, res) => {
     const widoczek = await Widoczek.findById(req.params.id);
-    res.render('widoczki/edit', { widoczek });
-}));
+    res.render("widoczki/edit", { widoczek });
+  })
+);
 // ------------ EDIT PUT -----------------------------
-app.put('/widoczki/:id', valitateWidoczki, catchAsync(async (req, res) => {
+app.put(
+  "/widoczki/:id",
+  valitateWidoczki,
+  catchAsync(async (req, res) => {
     const { id } = req.params;
-    const widoczek = await Widoczek.findByIdAndUpdate(id, { ...req.body.widoczek });
+    const widoczek = await Widoczek.findByIdAndUpdate(id, {
+      ...req.body.widoczek,
+    });
     res.redirect(`/widoczki/${widoczek._id}`);
-}));
+  })
+);
 // ------------ DELETE -----------------------------
-app.delete('/widoczki/:id', catchAsync(async (req, res) => {
+app.delete(
+  "/widoczki/:id",
+  catchAsync(async (req, res) => {
     const { id } = req.params;
     const widoczek = await Widoczek.findByIdAndDelete(id);
-    res.redirect('/widoczki/');
-}));
+    res.redirect("/widoczki/");
+  })
+);
+// ------------------CALCULATOR-------------------------------------
+
+app.get(
+    "/calculator",
+    catchAsync(async (req, res) => {
+      res.render("calculator/index", {  });
+    })
+  );
+
+// ------------------KEYNOTES-------------------------------------
+app.get(
+    "/keynotes",
+    catchAsync(async (req, res) => {
+      res.render("keynotes/index", {  });
+    })
+  );
+
+// ------------------TEMPLATE-------------------------------------
 // ------------------EXPRESS ERROR-------------------------------------
-app.all('*', (req, res, next) => {
-    next(new ExpressError('Page Not Found', 404));
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
 });
 // ----------------NEXT-------------------------------
 app.use((err, req, res, next) => {
-    const { statusCode = 500, message = 'Kurka wodna...' } = err;
-    res.status(statusCode).render('error', { err });
+  const { statusCode = 500, message = "Kurka wodna..." } = err;
+  res.status(statusCode).render("error", { err });
 });
 // ------------ APP START -----------------------------
 app.listen(3000, () => {
-    console.log('Started on port 3000');
+  console.log("Started on port 3000");
 });
-

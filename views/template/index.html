@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>The Website</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <section id="title" class="colored-section">
+        <div class="container-fluid">
+            <!-- Nav Bar -->
+
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
+                <!-- <nav id="navbar" class="navbar bg-dark navbar-expand-lg navbar-dark"> -->
+                <a class="navbar-brand" href="">The Website</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#pricing">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#copyright">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+            <!-- Title -->
+            <div class='row'>
+                <div class="col-lg-6 col-md-4 col-sm-3">
+                    <h1 class="main-description">This is the description of your website. Just type something here</h1>
+                    <button type="button" class="btn btn-lg btn-dark btn-outline-light"> <i class="fab fa-windows"></i>
+                        Button One</button>
+                    <button type="button" class="btn btn-lg btn-outline-light">
+                        <i class="fab fa-apple"></i> Button Two</button>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-3">
+                    <img id='the-image' src="images/homer.png" alt="iphone-mockup">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Features -->
+
+    <section id="features" class="container-fluid white-section">
+        <div class='row'>
+            <div class='feature-box col-lg-4'>
+                <i class="icon fas fa-bullseye fa-4x"></i>
+                <h3 class="featureTitle">First Feature</h3>
+                <p class="feature-description">Just say what you want to say</p>
+            </div>
+            <div class='feature-box col-lg-4'>
+                <i class="icon fas fa-clipboard-list fa-4x"></i>
+                <h3 class="featureTitle">Second Feature</h3>
+                <p class="feature-description">Great! Let's Add more!</p>
+            </div>
+            <div class='feature-box col-lg-4'>
+                <i class="icon fas fa-chart-line fa-4x"></i>
+                <h3 class="featureTitle">Third Feature</h3>
+                <p class="feature-description">If two wasn't enough!</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Testimonials -->
+
+    <section id="testimonials" class="colored-section">
+        <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="testimonial carousel-item active container-fluid">
+                    <h2 class="testimonial-comment">"Some fake comments from fake, smart looking users"</h2>
+                    <img class="testimonial-image" src="images/paniDoctor.png" alt="dog-profile">
+                    <span><em class='testimonial-author'> Dr Ying Yang, Wieliczka</em></span>
+                </div>
+                <div class="testimonial carousel-item container-fluid">
+                    <h2 class="testimonial-comment">"Another smart comment from a smart person"</h2>
+                    <img class="testimonial-image" src="images/engineer.jpg" alt="dog-profile">
+                    <span><em class='testimonial-author'> Dr Ling Wing, Radom</em></span>
+                </div>
+                <div class="testimonial carousel-item container-fluid">
+                    <h2 class="testimonial-comment">"And yet another one..."</h2>
+                    <img class="testimonial-image" src="images/oldman.jpg" alt="dog-profile">
+                    <span><em class='testimonial-author'> Mr Ping Pong, Hong Kong</em></span>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        </div>
+
+
+        <!-- <h2 class="testimonial-text">My dog used to be so lonely, but with TinDog's help, they've found the love of their life. I think.</h2>
+    <img class="testimonial-image" src="images/lady-img.jpg" alt="lady-profile">
+    <em>Beverly, Illinois</em> -->
+
+    </section>
+
+
+    <!-- Press -->
+
+    <section id="brands" class="colored-section">
+
+        <img class="brand-logos col-lg-3 col-md-4 col-sm-6" src="images/mcd.png" alt="logo">
+        <img class="brand-logos col-lg-3 col-md-4 col-sm-6" src="images/shell.png" alt="logo">
+        <img class="brand-logos col-lg-3 col-md-4 col-sm-6" src="images/netflix.png" alt="logo">
+        <img class="brand-logos col-lg-3 col-md-4 col-sm-6" src="images/Amazon.png" alt="logo">
+
+    </section>
+
+    <!-- Pricing -->
+
+    <section id="pricing" class="white-section">
+        <h2>This is the pricing plan section</h2>
+        <p>A description of what you're going to spend your money for</p>
+        <div id="pricingCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="pricing-plan carousel-item active container-fluid">
+                    <img class="d-block w-100" src="images/mieszko.jpg" alt="">
+                    <h3 class="pricing-name"> Mieszko </h3>
+                    <h2>Free</h2>
+                    <p>You probably got nothing here</p>
+                </div>
+                <div class="pricing-plan carousel-item container-fluid">
+                    <img class="d-block w-100" src="images/kazek.jpg" alt="">
+                    <h3 class="pricing-name"> Kazek </h3>
+                    <h2>49.99PLN</h2>
+                    <p>better this than nothing</p>
+                </div>
+                <div class="pricing-plan carousel-item container-fluid">
+                    <img class="d-block w-100" src="images/jagiello.jpg" alt="">
+                    <h3 class="pricing-name"> Włodek </h3>
+                    <h2>100PLN</h2>
+                    <p>Whatever you need</p>
+                </div>
+                <div class="pricing-plan carousel-item container-fluid">
+                    <img class="d-block w-100" src="images/zygmunt.jpg" alt="">
+                    <h3 class="pricing-name">Zygmunt Stary</h3>
+                    <h2>200PLN</h2>
+                    <p>You just overpaid</p>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#pricingCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#pricingCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div class='row'>
+            <div class="col-lg-4 col-md-12">
+                <div class="card pricing-card">
+                    <div class="card-header pricing-cards">Free</div>
+                    <div class="card-body pricing-card-body"><div>First Option</div>
+                        <button type="button" class="btn btn-lg btn-dark pricing-button">Sign up for free</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card pricing-card">
+                    <div class="card-header pricing-cards">50PLN</div>
+                    <div class="card-body pricing-card-body"><div>Second Option</div>
+                        <button type="button" class="btn btn-lg btn-dark pricing-button">Purchase </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card pricing-card">
+                    <div class="card-header pricing-cards">100PLN</div>
+                    <div class="card-body pricing-card-body"><div>Third Option</div>
+                        <button type="button" class="btn btn-lg btn-dark pricing-button"> Buy </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+    <!-- Call to Action -->
+
+    <section id="cta" class="container-fluid colored-section">
+
+        <h3 class="cta-text">If that wasnt enough, go ahead and click on the button!</h3>
+        <button type="button" class="btn btn-lg btn-dark btn-outline-light"> <i class="fab fa-windows"></i>
+            Button One</button>
+        <button type="button" class="btn btn-lg btn-outline-light">
+            <i class="fab fa-apple"></i> Button Two</button>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer id="footer" class="container-fluid white-section">
+       <a href='https://www.facebook.com/'> <i class="fab fa-facebook fa-4x footer-icons"></i></a>
+       <a href='https://twitter.com/home'> <i class="fab fa-twitter fa-4x footer-icons"></i></a>
+       <a href='https://www.instagram.com/'> <i class="fab fa-instagram fa-4x footer-icons"></i></a>
+       <a href='https://www.google.com/'> <i class="fab fa-google fa-4x footer-icons"></i></a>
+       <p id="copyright">© Copyright 2021 The Website</p>
+       <a href="#navbar" id="goBack">Go Back</a>
+    </footer>
+
+
+</body>
+
+</html>
