@@ -1,0 +1,58 @@
+.outer-centered:nth-of-type(2) {
+    margin-left: auto;
+}
+.outer-centered{
+    width:100%;
+    position:relative;
+}
+.outer-centered .inner{
+    margin: auto;
+    position:absolute;
+    top: 50%;
+    bottom:50%;
+    left:30%;
+    right:30%;
+    text-align: center;
+    vertical-align: center;
+}
+.outer-right {
+    position:relative;
+    margin-left: auto;
+    margin-top:auto;
+}
+
+.outer-left {
+    position:relative;
+    text-align: left;
+}
+
+.container {
+    display: flex;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+
+/* etc... */
+.outer-right .inner{
+    margin-left: auto;
+    position: relative;
+    bottom:0;
+    text-align: center;
+}
+.outer-right .inner {
+    display: flex;
+    position:absolute;
+    bottom:0;
+    right:0;
+    align-self: flex-end;
+    text-align: center;
+    vertical-align: text-bottom;
+
+}
+.outer-left .inner {
+    position:absolute;
+    bottom:0;
+    text-align: center;
+    vertical-align: baseline;
+}

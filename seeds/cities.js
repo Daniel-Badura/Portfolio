@@ -1,3 +1,4 @@
+
 module.exports = [
     { name: "Aleksandrów Kujawski", township: "aleksandrowski", province: "kujawsko-pomorskie", area: 7.23, people: 12270, dentensity: 1697 },
     { name: "Aleksandrów Łódzki", township: "zgierski", province: "łódzkie", area: 13.82, people: 21535, dentensity: 1558 },
@@ -939,4 +940,4 @@ module.exports = [
     { name: "Żychlin", township: "kutnowski", province: "łódzkie", area: 8.68, people: 8288, dentensity: 955 },
     { name: "Żyrardów", township: "żyrardowski", province: "mazowieckie", area: 14.35, people: 40243, dentensity: 2804 },
     { name: "Żywiec", township: "żywiecki", province: "śląskie", area: 50.54, people: 31560, dentensity: 624 }
-]
+];
