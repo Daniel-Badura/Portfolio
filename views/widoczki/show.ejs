@@ -1,9 +1,8 @@
 <% layout('layouts/boilerplateWidoczki') %>
     <div class="row">
-        <div class="col-6 offset-3">
-            <div class="card" >
-                <img src="<%= widoczek.image %>" class="card-img-top"
-                    alt="../img/default.jpg">
+        <div class="col-6">
+            <div class="card">
+                <img src="<%= widoczek.image %>" class="card-img-top" alt="../img/default.jpg">
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= widoczek.name %>
@@ -20,7 +19,7 @@
                         <%= widoczek.price %> € za jedno spojrzenie
                     </li>
                     <li class="list-group-item">
-                      
+                        tu coś dodam
                     </li>
                 </ul>
                 <div class="card-body">
@@ -31,22 +30,46 @@
                 </div>
             </div>
 
-            
+
+        </div>
+        <div class="col-6">
             <h2>Zostaw opinię:</h2>
             <form action="/widoczki/<%= widoczek._id %>/reviews" method="POST" novalidate class='validated-form'>
                 <div class='mb-3'>
-                    <label for="body" class="form-label">Rating</label>
-                    <input name='review[rating]' id='rating' class='form-range'type="range" min='1' max='5'>
+                    <label for="body" class="form-label">Ocena</label>
+                    <input name='review[rating]' id='rating' class='form-range' type="range" min='1' max='5'>
                 </div>
                 <div class='mb-3'>
-                    <label for="body" class="form-label">Review</label>
-                    <textarea name="review[body]" id='body' class="form-control" cols="30" rows="10" required></textarea>
-                  
+                    <label for="body" class="form-label">Opinia</label>
+                    <textarea name="review[body]" id='body' class="form-control" cols="30" rows="10"
+                        required></textarea>
+
                 </div>
-        
-                <button type="submit" class='btn btn-success'>Dodaj Opinię</button>
+
+                <button id="review" type="submit" class='btn btn-success'>Dodaj Opinię</button>
             </form>
+
+            <% for (let review of widoczek.reviews){ %>
+                <div class="card review">
+                    <div class="mb-3 card-body">
+                        <div class="card-body">
+                            <h5>Ocena: <%= review.rating %>
+                            </h5>
+                        </div>
+                        <div class="card-text">
+                            <%= review.body %>
+                        </div>
+                        <div>
+                            <form action="/widoczki/<%= widoczek._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                method="POST">
+                                <button class=" btn btn-sm btn-danger removeReview"> Usuń Opinię </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+
+
         </div>
     </div>
-
-

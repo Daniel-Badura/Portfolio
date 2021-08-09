@@ -34,4 +34,21 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
-  
+  .shrink{
+    padding:5%, 15%;
+    margin: auto;
+    
+  }
+  #review{
+    margin-bottom:2rem;
+  }
+  .review{
+    margin-bottom:1rem;
+    border-radius: 5%;
+  }
+  .removeReview{
+    margin:1rem;
+  }
+  .container{
+     margin-top:1rem;
+  }

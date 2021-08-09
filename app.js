@@ -5,7 +5,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const Widoczek = require("./models/Widoczek");
-const Review = require('./models/review');
+const Review = require("./models/review");
 // const { opis, miejsce } = require('./seeds/seedWidoczki');
 const methodOverride = require("method-override");
 const morgan = require("morgan");
@@ -14,8 +14,6 @@ const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const Joi = require("joi");
 const { widoczkiSchema, reviewSchema } = require("./schemas.js");
-
-
 
 //  -------- Joi Schema Validation ----------
 const valitateWidoczki = (req, res, next) => {
@@ -49,7 +47,7 @@ db.once("open", () => {
 });
 // ------------ EXPRESS SETUP -------------------------
 const app = express();
-app.use('/public', express.static('public'));
+app.use("/public", express.static("public"));
 app.use(express.urlencoded({ extend: true }));
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
@@ -109,14 +107,13 @@ app.post(
     await review.save();
     await widoczek.save();
     res.redirect(`/widoczki/${widoczek._id}`);
-
   })
 );
 // ------------ SHOW ----------------------------------
 app.get(
   "/widoczki/:id",
   catchAsync(async (req, res) => {
-    const widoczek = await Widoczek.findById(req.params.id);
+    const widoczek = await Widoczek.findById(req.params.id).populate("reviews");
     res.render("widoczki/show", { widoczek });
   })
 );
@@ -149,22 +146,31 @@ app.delete(
     res.redirect("/widoczki/");
   })
 );
+app.delete(
+  "/widoczki/:id/reviews/:reviewId",
+  catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Widoczek.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/widoczki/${id}`);
+  })
+);
 // ------------------CALCULATOR-------------------------------------
 
 app.get(
-    "/calculator",
-    catchAsync(async (req, res) => {
-      res.render("calculator/index", {  });
-    })
-  );
+  "/calculator",
+  catchAsync(async (req, res) => {
+    res.render("calculator/index", {});
+  })
+);
 
 // ------------------KEYNOTES-------------------------------------
 app.get(
-    "/keynotes",
-    catchAsync(async (req, res) => {
-      res.render("keynotes/index", {  });
-    })
-  );
+  "/keynotes",
+  catchAsync(async (req, res) => {
+    res.render("keynotes/index", {});
+  })
+);
 
 // ------------------TEMPLATE-------------------------------------
 // ------------------EXPRESS ERROR-------------------------------------
