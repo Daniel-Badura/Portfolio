@@ -30,5 +30,23 @@
                     </form>
                 </div>
             </div>
+
+            
+            <h2>Zostaw opinię:</h2>
+            <form action="/widoczki/<%= widoczek._id %>/reviews" method="POST" novalidate class='validated-form'>
+                <div class='mb-3'>
+                    <label for="body" class="form-label">Rating</label>
+                    <input name='review[rating]' id='rating' class='form-range'type="range" min='1' max='5'>
+                </div>
+                <div class='mb-3'>
+                    <label for="body" class="form-label">Review</label>
+                    <textarea name="review[body]" id='body' class="form-control" cols="30" rows="10" required></textarea>
+                  
+                </div>
+        
+                <button type="submit" class='btn btn-success'>Dodaj Opinię</button>
+            </form>
         </div>
     </div>
+
+

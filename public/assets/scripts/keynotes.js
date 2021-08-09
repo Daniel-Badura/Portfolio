@@ -290,7 +290,6 @@ function startRecording() {
   });
 }
 function playRecordedSequence() {
-  $(".progress-bar").width(0);
   if (recordedSequence[0] == undefined) {
     $(".score").text(`The Record is empty. Try again`);
     $("#play-record").addClass("hide");
@@ -316,16 +315,11 @@ function playRecordedSequence() {
             100
         );
         $(".progress-bar").width(`${progressBar}%`);
-        if (i == recordedSequence.length - 2) {
-          $(".progress-bar").width(0);
-        }
-
-        //  ----------------------
+              //  ----------------------
         playSound(recordedSequence[i].key);
       }, recordedSequence[i].timeStamp - firstNote);
     }
   }
-  $(".progress-bar").width(0);
 }
 function back() {
   $("#play-record").addClass("hide");

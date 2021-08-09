@@ -1,12 +1,11 @@
 .theTitle {
   text-align: center;
-  padding-top: 10%;
+  padding-top: 2%;
   font-size: 8rem;
   font-family: 'Dancing Script';
 }
 
-.container-fluid {
-  
+.container-main {  
   padding: 5% 15%;
 }
 
@@ -76,4 +75,8 @@ body {
 .clicked {
   background-color: gray;
   background-image: linear-gradient(to bottom right, white,gold);
+}
+.navbar-toggler{
+  color:white;
+  background-color: white;
 }

@@ -1,6 +1,31 @@
-.rainbow-text {
-  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+.flame-text {
+  background-image: linear-gradient(to left,  orange, red);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.body{
+  text-align: center;
+  display: flex;
+}
+.main-container{
+  padding: 5% 15%;
+  margin: auto;
+  text-align: center;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: gray;
+  text-align: center;
+}
+.list-unstyled{
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+h1{
+  font-size: 3rem;
+  color: black;
 }

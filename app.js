@@ -5,6 +5,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const Widoczek = require("./models/Widoczek");
+const Review = require('./models/review');
 // const { opis, miejsce } = require('./seeds/seedWidoczki');
 const methodOverride = require("method-override");
 const morgan = require("morgan");
@@ -12,12 +13,22 @@ const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const Joi = require("joi");
-const { widoczkiSchema } = require("./schemas.js");
-const Calculator =require("./models/Calculator");
+const { widoczkiSchema, reviewSchema } = require("./schemas.js");
+
+
 
 //  -------- Joi Schema Validation ----------
 const valitateWidoczki = (req, res, next) => {
   const { error } = widoczkiSchema.validate(req.body);
+  if (error) {
+    const message = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(message, 400);
+  } else {
+    next();
+  }
+};
+const valitateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
     const message = error.details.map((el) => el.message).join(",");
     throw new ExpressError(message, 400);
@@ -84,6 +95,21 @@ app.post(
     const widoczek = new Widoczek(req.body.widoczek);
     await widoczek.save();
     res.redirect(`/widoczki/${widoczek._id}`);
+  })
+);
+
+app.post(
+  "/widoczki/:id/reviews",
+  valitateReview,
+  catchAsync(async (req, res) => {
+    // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
+    const widoczek = await Widoczek.findById(req.params.id);
+    const review = new Review(req.body.review);
+    widoczek.reviews.push(review);
+    await review.save();
+    await widoczek.save();
+    res.redirect(`/widoczki/${widoczek._id}`);
+
   })
 );
 // ------------ SHOW ----------------------------------

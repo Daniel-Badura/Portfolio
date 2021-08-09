@@ -1,3 +1,4 @@
+/*jshint esversion: 9 */
 const Joi = require('joi');
 
 module.exports.widoczkiSchema = Joi.object({
@@ -8,5 +9,12 @@ module.exports.widoczkiSchema = Joi.object({
         description: Joi.string().required(),
         location: Joi.string().required()
     }).required()
+});
+
+module.exports.reviewSchema = Joi.object({
+    review: Joi.object({
+        rating: Joi.number().required(),
+        body: Joi.string().required()
+    })
 });
 
