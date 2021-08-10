@@ -14,9 +14,10 @@ const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 // const Joi = require("joi");
 // const { widoczkiSchema, reviewSchema } = require("./schemas.js");
-const widoczkiRoutes = require('./routes/widoczki');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const widoczkiRoutes = require("./routes/widoczki");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const flash = require('connect-flash');
 
 //  -------- Joi Schema Validation ----------
 // const valitateWidoczki = (req, res, next) => {
@@ -58,35 +59,61 @@ db.once("open", () => {
 const app = express();
 app.use("/public", express.static("public"));
 app.use(express.urlencoded({ extend: true }));
+// --------------------EJS----------------------------
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-// ----------------------------------------------------
-app.get("/", (req, res) => {
-  res.render("portfolio");
-});
+
 // ------------ MORGAN --------------------------------
 app.use(morgan("common"));
 // ------------ METHOD OVERRIDE -----------------------
 app.use(methodOverride("_method"));
-// ------------ INDEX WIDOCZKI------------------------------------------------------------------------------------------------
 
-app.use('/widoczki', widoczkiRoutes);
+// --------------------COOKIES AND FLASH -----------------
+
 //////////////////////////
-app.use(session({secret:'somethinggood'}));
-// ---------------------------------------- CRUD SECTION -------------------------------------------------
-// ------------ NEW -----------------------------------
-app.get('/viewcount', function(req,res){
- 
-if(req.session.count){
-  req.session.count+=1
-}else {
-  req.session.count=1;
-}
-res.send(`Wyświetliłeś tą stronę ${req.session.count} razy`);
+const sessionConfig = {
+  secret: "this is going to be a secret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 10,
+    maxAge: 1000*60*15,
+  },
+};
+app.use(session(sessionConfig));
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+app.use("/widoczki", widoczkiRoutes);
+
+// -----------------RENDER HOMEPAGE-------------------
+app.get("/", (req, res) => {
+  res.render("portfolio");
 });
 
-app.get('/headers', function(req,res){
+// ------------ INDEX WIDOCZKI------------------------------------------------------------------------------------------------
+
+
+
+
+
+// ---------------------------------------- CRUD SECTION -------------------------------------------------
+// ------------ NEW -----------------------------------
+app.get("/viewcount", function (req, res) {
+  if (req.session.count) {
+    req.session.count += 1;
+  } else {
+    req.session.count = 1;
+  }
+  res.send(`Wyświetliłeś tą stronę ${req.session.count} razy`);
+});
+
+app.get("/headers", function (req, res) {
   res.send(req.headers);
 });
 

@@ -5,7 +5,8 @@ const catchAsync = require("../utils/catchAsync");
 const Widoczek = require("../models/Widoczek");
 const { widoczkiSchema, reviewSchema } = require("../schemas.js");
 const Review = require("../models/review");
-
+// const flash = require('connect-flash');
+// router.use(flash());
 
 
 
@@ -59,8 +60,10 @@ router.get(
     valitateWidoczki,
     catchAsync(async (req, res) => {
       // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
+
       const widoczek = new Widoczek(req.body.widoczek);
       await widoczek.save();
+      req.flash('success', 'Dodano nowy widoczek');
       res.redirect(`/widoczki/${widoczek._id}`);
     })
   );
@@ -75,6 +78,7 @@ router.get(
       widoczek.reviews.push(review);
       await review.save();
       await widoczek.save();
+      req.flash('success', 'Dodano nową opinię!');
       res.redirect(`/widoczki/${widoczek._id}`);
     })
   );
@@ -83,6 +87,10 @@ router.get(
     "/:id",
     catchAsync(async (req, res) => {
       const widoczek = await Widoczek.findById(req.params.id).populate("reviews");
+      if(!widoczek){
+          req.flash('error', "Nie udało się znaleźć widoczku");
+          return res.redirect("/widoczki");
+      }
       res.render("widoczki/show", { widoczek });
     })
   );
@@ -91,6 +99,10 @@ router.get(
     "/:id/edit",
     catchAsync(async (req, res) => {
       const widoczek = await Widoczek.findById(req.params.id);
+      if(!widoczek){
+        req.flash('error', "Nie udało się znaleźć widoczku");
+        return res.redirect("/widoczki");
+    }
       res.render("widoczki/edit", { widoczek });
     })
   );
@@ -111,8 +123,12 @@ router.get(
     "/:id",
     catchAsync(async (req, res) => {
       const { id } = req.params;
-      const widoczek = await Widoczek.findByIdAndDelete(id);
-      res.redirect("/widoczki/", { widoczek });
+      
+      const widoczek = await Widoczek.findById(req.params.id)
+      req.flash("success", `Usunięto Widoczek ${widoczek.name}`);
+      await Widoczek.findByIdAndDelete(id);
+      res.redirect("/widoczki/");
+      
     })
   );
   router.delete(
@@ -121,6 +137,7 @@ router.get(
       const { id, reviewId } = req.params;
       await Widoczek.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
       await Review.findByIdAndDelete(reviewId);
+      req.flash("success", `Usunięto Opinię!`);
       res.redirect(`/widoczki/${id}`);
     })
   );
