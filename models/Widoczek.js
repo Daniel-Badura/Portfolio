@@ -1,6 +1,7 @@
 // jshint esversion: 9
 
 const mongoose = require("mongoose");
+const review = require("./review");
 const Schema = mongoose.Schema;
 
 const WidoczekSchema = new Schema({
@@ -16,5 +17,16 @@ const WidoczekSchema = new Schema({
     },
   ],
 });
+
+WidoczekSchema.post('findOneAndDelete', async function(document){
+    if(document){
+        await Review.deleteMany({
+            _id: {
+                $in: document.reviews
+            }
+        });
+    }
+});
+
 
 module.exports = mongoose.model("Widoczek", WidoczekSchema);

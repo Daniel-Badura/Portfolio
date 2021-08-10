@@ -4,37 +4,46 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const Widoczek = require("./models/Widoczek");
-const Review = require("./models/review");
+// const Widoczek = require("./models/Widoczek");
+// const Review = require("./models/review");
 // const { opis, miejsce } = require('./seeds/seedWidoczki');
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
-const Joi = require("joi");
-const { widoczkiSchema, reviewSchema } = require("./schemas.js");
+// const Joi = require("joi");
+// const { widoczkiSchema, reviewSchema } = require("./schemas.js");
+const widoczkiRoutes = require('./routes/widoczki');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 //  -------- Joi Schema Validation ----------
-const valitateWidoczki = (req, res, next) => {
-  const { error } = widoczkiSchema.validate(req.body);
-  if (error) {
-    const message = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(message, 400);
-  } else {
-    next();
-  }
-};
-const valitateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body);
-  if (error) {
-    const message = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(message, 400);
-  } else {
-    next();
-  }
-};
+// const valitateWidoczki = (req, res, next) => {
+//   const { error } = widoczkiSchema.validate(req.body);
+//   if (error) {
+//     const message = error.details.map((el) => el.message).join(",");
+//     throw new ExpressError(message, 400);
+//   } else {
+//     next();
+//   }
+// };
+// const valitateReview = (req, res, next) => {
+//   const { error } = reviewSchema.validate(req.body);
+//   if (error) {
+//     const message = error.details.map((el) => el.message).join(",");
+//     throw new ExpressError(message, 400);
+//   } else {
+//     next();
+//   }
+// };
+
+
 // ------------ CONNECT MONGOOSE ----------------------
+
+// --------------COOKIE PARSER ------------------------
+// app.use(cookieParser());
+// --------------------------------------
 mongoose.connect("mongodb://localhost:27017/portfolio", {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -61,100 +70,26 @@ app.use(morgan("common"));
 // ------------ METHOD OVERRIDE -----------------------
 app.use(methodOverride("_method"));
 // ------------ INDEX WIDOCZKI------------------------------------------------------------------------------------------------
-app.get(
-  "/widoczki",
-  catchAsync(async (req, res) => {
-    const widoczki = await Widoczek.find({});
-    res.render("widoczki/index", { widoczki });
-  })
-);
-// ------------ HOME ---------------------------------
-app.get(
-  "/widoczki/home",
-  catchAsync(async (req, res) => {
-    res.render("widoczki/home");
-  })
-);
+
+app.use('/widoczki', widoczkiRoutes);
+//////////////////////////
+app.use(session({secret:'somethinggood'}));
 // ---------------------------------------- CRUD SECTION -------------------------------------------------
 // ------------ NEW -----------------------------------
-app.get(
-  "/widoczki/new",
-  catchAsync(async (req, res) => {
-    const widoczki = await Widoczek.find({});
-    res.render("widoczki/new", { widoczki });
-  })
-);
-// ------------ POST NEW-------------------------------
-app.post(
-  "/widoczki",
-  valitateWidoczki,
-  catchAsync(async (req, res) => {
-    // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
-    const widoczek = new Widoczek(req.body.widoczek);
-    await widoczek.save();
-    res.redirect(`/widoczki/${widoczek._id}`);
-  })
-);
+app.get('/viewcount', function(req,res){
+ 
+if(req.session.count){
+  req.session.count+=1
+}else {
+  req.session.count=1;
+}
+res.send(`Wyświetliłeś tą stronę ${req.session.count} razy`);
+});
 
-app.post(
-  "/widoczki/:id/reviews",
-  valitateReview,
-  catchAsync(async (req, res) => {
-    // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
-    const widoczek = await Widoczek.findById(req.params.id);
-    const review = new Review(req.body.review);
-    widoczek.reviews.push(review);
-    await review.save();
-    await widoczek.save();
-    res.redirect(`/widoczki/${widoczek._id}`);
-  })
-);
-// ------------ SHOW ----------------------------------
-app.get(
-  "/widoczki/:id",
-  catchAsync(async (req, res) => {
-    const widoczek = await Widoczek.findById(req.params.id).populate("reviews");
-    res.render("widoczki/show", { widoczek });
-  })
-);
-// ------------ EDIT ----------------------------------
-app.get(
-  "/widoczki/:id/edit",
-  catchAsync(async (req, res) => {
-    const widoczek = await Widoczek.findById(req.params.id);
-    res.render("widoczki/edit", { widoczek });
-  })
-);
-// ------------ EDIT PUT -----------------------------
-app.put(
-  "/widoczki/:id",
-  valitateWidoczki,
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const widoczek = await Widoczek.findByIdAndUpdate(id, {
-      ...req.body.widoczek,
-    });
-    res.redirect(`/widoczki/${widoczek._id}`);
-  })
-);
-// ------------ DELETE -----------------------------
-app.delete(
-  "/widoczki/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const widoczek = await Widoczek.findByIdAndDelete(id);
-    res.redirect("/widoczki/");
-  })
-);
-app.delete(
-  "/widoczki/:id/reviews/:reviewId",
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await Widoczek.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/widoczki/${id}`);
-  })
-);
+app.get('/headers', function(req,res){
+  res.send(req.headers);
+});
+
 // ------------------CALCULATOR-------------------------------------
 
 app.get(
@@ -173,6 +108,12 @@ app.get(
 );
 
 // ------------------TEMPLATE-------------------------------------
+app.get(
+  "/template",
+  catchAsync(async (req, res) => {
+    res.render("template/index", {});
+  })
+);
 // ------------------EXPRESS ERROR-------------------------------------
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
