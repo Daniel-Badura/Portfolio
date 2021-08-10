@@ -18,6 +18,9 @@ const widoczkiRoutes = require("./routes/widoczki");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require('connect-flash');
+const bcrypt = require('bcrypt');
+const User = require('./models/user');
+
 
 //  -------- Joi Schema Validation ----------
 // const valitateWidoczki = (req, res, next) => {
@@ -95,14 +98,6 @@ app.use("/widoczki", widoczkiRoutes);
 app.get("/", (req, res) => {
   res.render("portfolio");
 });
-
-// ------------ INDEX WIDOCZKI------------------------------------------------------------------------------------------------
-
-
-
-
-
-// ---------------------------------------- CRUD SECTION -------------------------------------------------
 // ------------ NEW -----------------------------------
 app.get("/viewcount", function (req, res) {
   if (req.session.count) {
@@ -141,6 +136,34 @@ app.get(
     res.render("template/index", {});
   })
 );
+// -------------------REGISTER----------------------------
+app.get('/register', (req,res)=>{
+  res.render('register');
+});
+
+app.post('/register', async (req,res)=>{
+  const {username, email, password} = req.body;
+  const hash = await bcrypt.hash(password, 12);
+  const user = new User({
+    username: username,
+    email: email,
+    password: hash
+  });
+  await user.save();
+  res.redirect('/login');
+});
+// ------------------------LOGIN--------------------------------
+app.get('/login', (req,res) => {
+  res.render('login');
+  
+});
+
+// -------------------AUTHENTICATED ROUTE----------------------------
+
+app.get('/tajne', (req,res)=>{
+  res.send('Nie zobaczysz mnie jeśli nie jesteś zalogowany');
+});
+
 // ------------------EXPRESS ERROR-------------------------------------
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
