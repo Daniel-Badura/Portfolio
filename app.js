@@ -17,10 +17,12 @@ const ExpressError = require("./utils/ExpressError");
 const widoczkiRoutes = require("./routes/widoczki");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const flash = require('connect-flash');
-const bcrypt = require('bcrypt');
-const User = require('./models/user');
-
+const flash = require("connect-flash");
+// const bcrypt = require("bcrypt");
+const User = require("./models/user");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const usersRoutes = require('./routes/users');
 
 //  -------- Joi Schema Validation ----------
 // const valitateWidoczki = (req, res, next) => {
@@ -41,7 +43,6 @@ const User = require('./models/user');
 //     next();
 //   }
 // };
-
 
 // ------------ CONNECT MONGOOSE ----------------------
 
@@ -72,7 +73,6 @@ app.use(morgan("common"));
 // ------------ METHOD OVERRIDE -----------------------
 app.use(methodOverride("_method"));
 
-// --------------------COOKIES AND FLASH -----------------
 
 //////////////////////////
 const sessionConfig = {
@@ -82,17 +82,34 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     expires: Date.now() + 1000 * 60 * 10,
-    maxAge: 1000*60*15,
+    maxAge: 1000 * 60 * 15,
   },
 };
+// use app.session before passport.session //
 app.use(session(sessionConfig));
+// --------------------COOKIES AND FLASH -----------------
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
-app.use((req,res,next)=>{
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
+// -----------------ROUTES --------------------------
 app.use("/widoczki", widoczkiRoutes);
+app.use("/", usersRoutes);
+
+//------------------PASSPORT--------------------------
+
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+// store user in the session:
+passport.serializeUser(User.serializeUser());
+// unstore user in the session:
+passport.deserializeUser(User.deserializeUser());
+User.createStrategy();
 
 // -----------------RENDER HOMEPAGE-------------------
 app.get("/", (req, res) => {
@@ -136,32 +153,22 @@ app.get(
     res.render("template/index", {});
   })
 );
-// -------------------REGISTER----------------------------
-app.get('/register', (req,res)=>{
-  res.render('register');
-});
 
-app.post('/register', async (req,res)=>{
-  const {username, email, password} = req.body;
-  const hash = await bcrypt.hash(password, 12);
-  const user = new User({
-    username: username,
-    email: email,
-    password: hash
-  });
-  await user.save();
-  res.redirect('/login');
-});
+
 // ------------------------LOGIN--------------------------------
-app.get('/login', (req,res) => {
-  res.render('login');
-  
-});
 
+// ------------------AUTH MIDDLEWARE --------------------------------
+const requireAuth = (req, res, next) => {
+  if (!req.session.user_id) {
+    req.flash("error", "Wymangane logowanie");
+    return res.redirect("/login");
+  }
+  next();
+};
 // -------------------AUTHENTICATED ROUTE----------------------------
 
-app.get('/tajne', (req,res)=>{
-  res.send('Nie zobaczysz mnie jeśli nie jesteś zalogowany');
+app.get("/tajne", requireAuth, (req, res) => {
+  res.send("Widzisz mnie bo jesteś zalogowany");
 });
 
 // ------------------EXPRESS ERROR-------------------------------------
