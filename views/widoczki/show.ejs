@@ -75,7 +75,7 @@
                         <div class="card-text review-text">
                             <%= review.body %>
                         </div>
-                        <% if(currentUser.username== review.author) {%> 
+                        <% if(currentUser){if(currentUser.username== review.author) {%> 
                         <div>
                             <form action="/widoczki/<%= widoczek._id %>/reviews/<%= review._id %>?_method=DELETE"
                                 method="POST">                                
@@ -85,7 +85,7 @@
                         <% } %> 
                     </div>
                 </div>
-                <% } %>
+                <% }} %>
 
 
 

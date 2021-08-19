@@ -6,6 +6,7 @@ const Widoczek = require("../models/Widoczek");
 const { widoczkiSchema, reviewSchema } = require("../schemas.js");
 const Review = require("../models/review");
 const {isLoggedIn} = require("../middleware/isLoggedIn");
+const {isAuthorizedWidoczek, isAuthorizedReview} = require("../middleware/isAuthorized");
 // const flash = require('connect-flash');
 // router.use(flash());
 
@@ -89,7 +90,7 @@ router.get(
     res.render("widoczki/show", { widoczek });
   })
 );
-// ------------ EDIT ----------------------------------
+// ------------ EDIT ROUTE----------------------------------
 router.get(
   "/widoczki/:id/edit",
   catchAsync(async (req, res) => {
@@ -104,6 +105,7 @@ router.get(
 // ------------ EDIT PUT -----------------------------
 router.put(
   "/widoczki/:id",
+  isAuthorizedWidoczek,
   valitateWidoczki,
   catchAsync(async (req, res) => {
     const { id } = req.params;
