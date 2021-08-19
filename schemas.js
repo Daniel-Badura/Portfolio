@@ -7,14 +7,16 @@ module.exports.widoczkiSchema = Joi.object({
         image: Joi.string().required(),
         price: Joi.number().required().min(0),
         description: Joi.string().required(),
-        location: Joi.string().required()
+        location: Joi.string().required(),
+        author: Joi.string().required(),
     }).required()
 });
 
 module.exports.reviewSchema = Joi.object({
     review: Joi.object({
         rating: Joi.number().required(),
-        body: Joi.string().required()
+        body: Joi.string().required(),
+        author: Joi.string().required(),
     })
 });
 

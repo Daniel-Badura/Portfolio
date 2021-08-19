@@ -10,6 +10,7 @@ const WidoczekSchema = new Schema({
   price: Number,
   description: String,
   location: String,
+  author: String,
   reviews: [
     {
       type: Schema.Types.ObjectId,

@@ -146,8 +146,7 @@ function createGameSequence(level) {
 
 // --------------- CHOOSE PLAYBACK SPE ---------------------//
 let playSpeed = 1000;
-$(".speed").click(function (clicked) {
-  // console.log($(this))
+$(".speed").click(function () {
   $(this).addClass("selected-button");
   $(this).siblings().removeClass("selected-button");
   switch ($(this)[0].innerText) {

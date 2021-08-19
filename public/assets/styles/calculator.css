@@ -1,7 +1,7 @@
 .theTitle {
   text-align: center;
   padding-top: 2%;
-  font-size: 8rem;
+  font-size: 4rem;
   font-family: 'Dancing Script';
 }
 
@@ -11,7 +11,6 @@
 
 body {
   background-image: linear-gradient(to bottom right, rgb(213, 190, 232), rgb(194, 252, 165));
-  
   text-align: center;
   font-weight: 900;
 }
@@ -25,24 +24,18 @@ body {
 
 .calc-button {
   padding: 1rem;
-  /* border: solid 2px black; */
   font-size: 2rem;
-  /* background-color: aquamarine; */
   background-image: linear-gradient(to bottom right, red, yellow);
 }
 
 .calc-lower-button {
   padding: 1rem;
-  /* border: solid 2px black; */
   font-size: 2rem;
-  /* background-color: orange; */
   background-image: linear-gradient(to bottom right, rgb(94, 11, 247), rgb(59, 226, 37));
 }
 
 .calc-display {
-  /* border: solid 5px black; */
   font-size: 2rem;
-  /* background-color: blue; */
   padding: 5% 5%;
   background-image: linear-gradient(to bottom right, rgb(14, 241, 230), rgb(255, 0, 242));
 }

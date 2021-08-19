@@ -32,3 +32,17 @@ h1{
 .navbar{
   margin-bottom:1rem;
 }
+.nav-link:hover{
+  transition: 1s;
+  color:white;
+  transform: scale(110%);
+}
+.navbar-brand:hover{
+  transition: 1s;
+  color:white;
+  transform: scale(110%);
+  
+}
+#name-tag{
+  color:yellow;
+}

@@ -24,26 +24,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const usersRoutes = require('./routes/users');
 
-//  -------- Joi Schema Validation ----------
-// const valitateWidoczki = (req, res, next) => {
-//   const { error } = widoczkiSchema.validate(req.body);
-//   if (error) {
-//     const message = error.details.map((el) => el.message).join(",");
-//     throw new ExpressError(message, 400);
-//   } else {
-//     next();
-//   }
-// };
-// const valitateReview = (req, res, next) => {
-//   const { error } = reviewSchema.validate(req.body);
-//   if (error) {
-//     const message = error.details.map((el) => el.message).join(",");
-//     throw new ExpressError(message, 400);
-//   } else {
-//     next();
-//   }
-// };
-
 // ------------ CONNECT MONGOOSE ----------------------
 
 // --------------COOKIE PARSER ------------------------
@@ -93,12 +73,13 @@ app.use(passport.session());
 
 app.use(flash());
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
 // -----------------ROUTES --------------------------
-app.use("/widoczki", widoczkiRoutes);
+app.use("/", widoczkiRoutes);
 app.use("/", usersRoutes);
 
 //------------------PASSPORT--------------------------

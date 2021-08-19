@@ -2,10 +2,12 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const {ifUserExists, ifEmailExists, validatePassword} = require("../middleware/registerValidation");
 const catchAsync = require("../utils/catchAsync");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 router.use(cookieParser());
+
 
 // ------------------------LOGIN--------------------------------
 
@@ -17,7 +19,7 @@ router.post(
   passport.authenticate("local", {
     failureFlash: true,
     failureRedirect: "/login",
-    session: true
+    session: true,
   }),
   (req, res) => {
     req.flash("success", `Siema ${req.body.username}`);
@@ -50,6 +52,9 @@ router.get("/register", (req, res) => {
 
 router.post(
   "/register",
+  ifUserExists,
+  ifEmailExists,
+  validatePassword,
   catchAsync(async (req, res) => {
     try {
       const { username, email, password } = req.body;
@@ -60,7 +65,12 @@ router.post(
       const newUser = await User.register(user, password);
       await user.save();
       req.flash("success", `Pomyślnie zarejestrowano użytkownika ${username}`);
-      res.redirect("/login");
+      req.login(newUser, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
     } catch (err) {
       req.flash("error", err.message);
       res.redirect("/register");
@@ -68,9 +78,9 @@ router.post(
   })
 );
 // ------------------------LOGOUT ----------------------------
-router.get("/logout", (req,res)=>{
-    req.logout();
-    req.flash('success', 'Wylogowano pomyślnie');
-    res.redirect('/');
+router.get("/logout", (req, res) => {
+  req.logout();
+  req.flash("success", "Wylogowano pomyślnie");
+  res.redirect("/");
 });
 module.exports = router;

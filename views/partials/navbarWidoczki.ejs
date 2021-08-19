@@ -6,38 +6,36 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/widoczki/home">Strona Główna</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/widoczki">Widoczki</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/widoczki/new">Dodaj Widoczek</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li> -->
-            </ul>
+            <a class="nav-link active" aria-current="page" href="/widoczki/home">Strona Główna</a>
+            <a class="nav-link" href="/widoczki">Widoczki</a>
+            <a class="nav-link" href="/widoczki/new">Dodaj Widoczek</a>
+        </div>
+        <div class='navbar-nav ms-auto'>
+            <% if(!currentUser) {%> 
+            <a class="nav-link " href="/login">logowanie</a>
+            <a class="nav-link " href="/register">rejestracja</a>
+            <% } else { %> 
+                <a class="nav-link disabled" id="name-tag" href="/logout "><%= currentUser.username %> </a> 
+            <a class="nav-link " href="/logout ">wyloguj</a>
+            <% } %> 
         </div>
     </div>
 </nav>
 
 <script>// When the user scrolls the page, execute myFunction
-    window.onscroll = function() {myFunction()};
-    
+    window.onscroll = function () { myFunction() };
+
     // Get the navbar
     var navbar = document.getElementById("navbar");
-    
+
     // Get the offset position of the navbar
     var sticky = navbar.offsetTop;
-    
+
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-      } else {
-        navbar.classList.remove("sticky");
-      }
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
     }</script>

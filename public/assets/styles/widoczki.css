@@ -52,3 +52,10 @@
   .container{
      margin-top:1rem;
   }
+  .review-text{
+text-align: center;
+background-color: rgb(242, 248, 248);
+  }
+  .review-author{
+    color:gray;
+  }

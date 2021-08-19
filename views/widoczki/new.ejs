@@ -5,7 +5,7 @@
         </h1>
         <div class="col-6 offset-3">
 
-            
+
             <form action="/widoczki/new" method="POST" novalidate class="validated-form">
                 <!-- NAZWA -->
                 <div class="mb-3">
@@ -53,8 +53,17 @@
                         Dobrze!
                     </div>
                 </div>
-                <!-- PRZYCISK -->
-                <button class="btn btn-success">Dodaj Widoczek</button>
+                <% if(currentUser){ %>
+                    <div class="mb-3">
+                        <label class="form-label" for="author">Autor</label>
+                        <input class="form-control disabled" type="text" id="author" name="widoczek[author]" value='<%= currentUser.username %>' required readonly></input>
+                        <div class="valid-feedback green">
+                            Dobrze!
+                        </div>
+                    </div>
+                    <% } %>
+                        <!-- PRZYCISK -->
+                        <button class="btn btn-success">Dodaj Widoczek</button>
             </form>
             <p></p>
             <a class="mb-3" href="/widoczki">Pokaż wszystkie widoczki</a>

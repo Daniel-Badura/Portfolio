@@ -30,7 +30,7 @@ const valitateReview = (req, res, next) => {
 };
 
 router.get(
-  "",
+  "/widoczki",
   catchAsync(async (req, res) => {
     const widoczki = await Widoczek.find({});
     res.render("widoczki/index", { widoczki });
@@ -38,26 +38,24 @@ router.get(
 );
 // ------------ HOME ---------------------------------
 router.get(
-  "/home",
+  "/widoczki/home",
   catchAsync(async (req, res) => {
     res.render("widoczki/home");
   })
 );
 
 router.get(
-  "/new",
+  "/widoczki/new",
   catchAsync(async (req, res) => {
     res.render("widoczki/new");
   })
 );
 // ------------ POST NEW-------------------------------
 router.post(
-  "/new",
+  "/widoczki/new",
   isLoggedIn,
   valitateWidoczki,
   catchAsync(async (req, res) => {
-    // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
-
     const widoczek = new Widoczek(req.body.widoczek);
     await widoczek.save();
     req.flash("success", "Dodano nowy widoczek");
@@ -66,10 +64,10 @@ router.post(
 );
 
 router.post(
-  "/:id/reviews",
+  "/widoczki/:id",
+  isLoggedIn,
   valitateReview,
   catchAsync(async (req, res) => {
-    // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
     const widoczek = await Widoczek.findById(req.params.id);
     const review = new Review(req.body.review);
     widoczek.reviews.push(review);
@@ -81,7 +79,7 @@ router.post(
 );
 // ------------ SHOW ----------------------------------
 router.get(
-  "/:id",
+  "/widoczki/:id",
   catchAsync(async (req, res) => {
     const widoczek = await Widoczek.findById(req.params.id).populate("reviews");
     if (!widoczek) {
@@ -93,7 +91,7 @@ router.get(
 );
 // ------------ EDIT ----------------------------------
 router.get(
-  "/:id/edit",
+  "/widoczki/:id/edit",
   catchAsync(async (req, res) => {
     const widoczek = await Widoczek.findById(req.params.id);
     if (!widoczek) {
@@ -105,7 +103,7 @@ router.get(
 );
 // ------------ EDIT PUT -----------------------------
 router.put(
-  "/:id",
+  "/widoczki/:id",
   valitateWidoczki,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -117,7 +115,7 @@ router.put(
 );
 // ------------ DELETE -----------------------------
 router.delete(
-  "/:id",
+  "/widoczki/:id",
   catchAsync(async (req, res) => {
     const { id } = req.params;
 
@@ -128,7 +126,7 @@ router.delete(
   })
 );
 router.delete(
-  "/:id/reviews/:reviewId",
+  "/widoczki/:id/reviews/:reviewId",
   catchAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     await Widoczek.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });

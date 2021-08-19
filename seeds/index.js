@@ -1,4 +1,5 @@
 // jshint esversion: 9
+// node seeds/index.js
 
 const mongoose = require("mongoose");
 const { miejsce, opis } = require("./seedWidoczki");
@@ -30,11 +31,11 @@ const seedDB = async () => {
       name: `${generatorNazw(opis)} ${generatorNazw(miejsce)}`,
       description: `${loremIpsum({ count: 10 })}`,
       price: `${Math.floor(Math.random() * 15 + 5)}`,
+      author: 'Daniel'
     });
     await widoczek.save();
   }
 };
-
 seedDB().then(() => {
   mongoose.connection.close();
 });
