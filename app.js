@@ -23,6 +23,8 @@ const User = require("./models/user");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const usersRoutes = require('./routes/users');
+const Record = require("./models/recordings");
+const Score = require("./models/scores");
 
 // ------------ CONNECT MONGOOSE ----------------------
 
@@ -126,7 +128,25 @@ app.get(
     res.render("keynotes/index", {});
   })
 );
-
+app.get(
+  "/keynotes/scoreboard",
+  
+  catchAsync(async (req, res) => {
+    const scores = await Score.find({}).sort({"score": -1});
+    res.render("keynotes/scoreboard", {scores});
+  })
+);
+app.post(
+  "/keynotes",
+  catchAsync(async (req, res) => {
+    console.log(req.body.keynotes);
+    const score = new Score(req.body.keynotes);
+    await score.save();
+    console.log(recordedSequence);
+    req.flash("success", "Zapisano");
+    res.redirect('/keynotes');
+  })
+);
 // ------------------TEMPLATE-------------------------------------
 app.get(
   "/template",

@@ -12,6 +12,7 @@ h1 {
 footer {
   color: white;
   font-family: sans-serif;
+  
 }
 
 .set {
@@ -33,7 +34,7 @@ body {
 
 ul.set {
   height: 18.875em;
-  width: 34em;
+  width: 47em;
   margin: 1em auto;
   padding: 3rem 0 0 3.5rem;
   position: relative;
@@ -81,7 +82,8 @@ ul .white:active {
 .volume {
   color: white;
   font-family: "Arvo", cursive;
-  margin:2%
+  margin:2%;
+  padding: 2 15%;
 }
 
 .black {
@@ -105,9 +107,13 @@ ul .white:active {
   background: linear-gradient(to right, #444 0%, #222 100%)
 }
 
-.a, .g, .f, .d, .c {
+.s, .h, .j, .l, .px, .d, .g, .px {
   margin: 0 0 0 -1em
 }
+.c{
+  margin: 0 0 0 0em
+}
+
 
 ul li:first-child {
   border-radius: 5px 0 5px 5px
@@ -128,23 +134,15 @@ ul li:last-child {
   margin-bottom: 1rem;
   
 }
-/* 
-#play {
-  height: 10rem;
-  width: 10rem;
-  margin: 0 auto;
-  border-radius: 30%;
-  font-family: "Arvo", cursive;
-  font-size: 3rem;
-} */
-
+ 
 .scoreboard {
-  height: 15rem;
-  width:30%;
+  height: auto;
+  width:auto;
   margin: 0 auto;
   border-radius: 30%;
   font-family: "Arvo", cursive;
   font-size: 3rem;
+  padding-bottom:1rem;
 }
 
 /* .next-level {
@@ -183,4 +181,21 @@ ul li:last-child {
   font-family: "Arvo", cursive;
   font-size: 2rem;
   line-height: 2rem;
+}
+
+#save{
+  margin-bottom:5em;
+}
+#footer{
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.scores{
+  background: linear-gradient(to bottom,#5e40c4,#04a330);
+}
+.scores h3{
+  color:violet
+}
+.scores p{
+  color:white;
 }

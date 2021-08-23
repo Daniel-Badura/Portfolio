@@ -1,20 +1,10 @@
 // jshint esversion: 9
+
 const notes = document.getElementsByClassName("note");
 
-// --------------------- Poor Solution ---------------------------
-
-// for (let i = 0; i < notes.length; i++) {
-//   let id = notes[i].id;
-//   eval("var audio_" + id + " = new Audio('/sounds/" + id + ".wav');");
-//   let keyChar = "audio_"+id;
-//   notes[i].addEventListener("click", function () {
-//     playNote(eval(keyChar));
-//   });
-// }
-// --------------------- Better Solution ---------------------------
 
 function clicked(key) {
-  var pressedKey = document.querySelector("#" + key);
+  let pressedKey = document.querySelector("#" + key);
   pressedKey.classList.add("white-active");
   setTimeout(function () {
     pressedKey.classList.remove("white-active");
@@ -38,52 +28,72 @@ function playAudio(id) {
 function playSound(key) {
   switch (key) {
     case "a":
-      clicked("c");
-      playAudio("gs");
-      break;
-    case "w":
-      clicked("cs");
+      clicked("a");
       playAudio("a");
       break;
+    case "w":
+      clicked("w");
+      playAudio("w");
+      break;
     case "s":
-      clicked("d");
-      playAudio("as");
+      clicked("s");
+      playAudio("s");
       break;
     case "e":
-      clicked("ds");
-      playAudio("b");
-      break;
-    case "d":
       clicked("e");
-      playAudio("cs");
-      break;
-    case "j":
-      clicked("f");
-      playAudio("c");
-      break;
-    case "i":
-      clicked("fs");
-      playAudio("d");
-      break;
-    case "k":
-      clicked("g");
-      playAudio("ds");
-      break;
-    case "o":
-      clicked("gs");
       playAudio("e");
       break;
-    case "l":
-      clicked("a");
-      playAudio("fs");
+    case "d":
+      clicked("d");
+      playAudio("d");
       break;
-    case "p":
-      clicked("as");
+    case "f":
+      clicked("f");
       playAudio("f");
       break;
-    case ";":
-      clicked("b");
+    case "t":
+      clicked("t");
+      playAudio("t");
+      break;
+    case "g":
+      clicked("g");
       playAudio("g");
+      break;
+    case "y":
+      clicked("y");
+      playAudio("y");
+      break;
+    case "h":
+      clicked("h");
+      playAudio("h");
+      break;
+    case "u":
+      clicked("u");
+      playAudio("u");
+      break;
+    case "j":
+      clicked("j");
+      playAudio("j");
+      break;
+    case "k":
+      clicked("k");
+      playAudio("k");
+      break;
+    case "o":
+      clicked("o");
+      playAudio("o");
+      break;
+    case "l":
+      clicked("l");
+      playAudio("l");
+      break;
+    case "p":
+      clicked("p");
+      playAudio("p");
+      break;
+    case ";":
+      clicked("px");
+      playAudio(";");
       break;
   }
 }
@@ -92,7 +102,10 @@ for (let i = 0; i < notes.length; i++) {
   playableKeys.push(notes[i].innerText);
   let id = notes[i].id;
   notes[i].addEventListener("click", function () {
-    playAudio(id);
+    if(id == 'px')
+    {playAudio(";");}
+    else{
+    playAudio(id);}
   });
 }
 
@@ -207,6 +220,7 @@ function startPlayerSequence() {
     // == wrong == //
     function wrong() {
       back();
+      $("#player-score").val(`${score}`);
       $(".score").text(`GAME OVER: Your score is: ${score}`);
       removeListeners();
       score = 0;
@@ -214,11 +228,14 @@ function startPlayerSequence() {
       playerSequence = [];
       gameSequence = [];
       $(".progress-bar").width(0);
+      $("#save").removeClass("hide");
+
     }
     // === correct == //
     function correct() {
       console.log("Correct");
-      score++;
+      if (score==0){score=1;}else{score+=score;}
+      $("#player-score").val(`${score}`);
       $(".score").text(`CORRECT! Your score is now: ${score}`);
       nextLevel.removeClass("hide");
       removeListeners();
@@ -272,6 +289,7 @@ function stopRecording() {
   // $("#play").removeClass("hide");
   $("#play-record").removeClass("hide");
   $("#back").removeClass("hide");
+  $("#save").removeClass("hide");
 }
 function startRecording() {
   $("#record").addClass("hide");
@@ -327,6 +345,7 @@ function back() {
   $("#record").removeClass("hide");
   $("#next-level").addClass("hide");
   $("#back").addClass("hide");
+  $("#save").addClass("hide");
   stop();
 }
 $("#record").click(startRecording);

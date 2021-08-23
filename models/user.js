@@ -13,7 +13,15 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Pole email nie może być puste'],
         unique: true
+    },
+    recordings: [{
+        type: Array,
     }
+    ],
+    score:{
+        type:Number
+    }
+    
     // password: {
     //     type: String,
     //     required: [true, 'Pole hasło nie może być puste']
