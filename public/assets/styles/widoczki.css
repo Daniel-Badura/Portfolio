@@ -1,61 +1,142 @@
 /* Style the navbar */
+
 #navbar {
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-  /* Navbar links */
-  #navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-  }
-  
-  /* Page content */
-  .content {
-    padding: 16px;
-  }
-  
-  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  
-  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-  .sticky + .content {
-    padding-top: 60px;
-  }
-  .text-center{
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  .shrink{
-    padding:5%, 15%;
-    margin: auto;
-    
-  }
-  #review{
-    margin-bottom:2rem;
-  }
-  .review{
-    margin-bottom:1rem;
-    border-radius: 5%;
-  }
-  .removeReview{
-    margin:1rem;
-  }
-  .container{
-     margin-top:1rem;
-  }
-  .review-text{
-text-align: center;
-background-color: rgb(242, 248, 248);
-  }
-  .review-author{
-    color:gray;
-  }
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Navbar links */
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+/* Page content */
+
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+
+.sticky+.content {
+  padding-top: 60px;
+}
+
+.text-center {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.shrink {
+  padding: 5%, 15%;
+  margin: auto;
+}
+
+#review {
+  margin-bottom: 2rem;
+}
+
+.review {
+  margin-bottom: 1rem;
+  border-radius: 5%;
+}
+
+.removeReview {
+  margin: 1rem;
+}
+
+.container {
+  margin-top: 1rem;
+}
+
+.review-text {
+  text-align: center;
+  background-color: rgb(242, 248, 248);
+}
+
+.review-author {
+  color: gray;
+}
+
+.nav-link {
+  color: orangered;
+  padding: 0;
+  padding-right: 1rem;
+}
+
+.nav-link:hover {
+  transition: 1s;
+  color: white;
+}
+
+.navbar-brand {
+  color: orangered;
+}
+
+.navbar-brand:hover {
+  transition: 1s;
+  color: white;
+}
+
+#widoczki-title {
+  font-weight: 900;
+  font-family: 'Pirata One';
+  text-align: center;
+  font-size: 4rem;
+  padding: 1rem;
+}
+
+.dancing-script {
+  font-family: 'Dancing Script';
+  font-weight: 400;
+  font-size: 1.5rem;
+  max-height: 16rem;
+  overflow: hidden;
+  padding-left: 0.5rem;
+}
+
+.card {
+  padding: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  border-radius: 0%;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-body {
+  padding-top: 0;
+}
+
+.card-title {
+  font-family: 'Pirata One';
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  padding: 1rem;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 0px 8px 0 rgb(170, 229, 250), 0 6px 20px 0 rgb(170, 229, 250);
+}
+.show-card{
+}

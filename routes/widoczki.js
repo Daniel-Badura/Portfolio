@@ -5,13 +5,17 @@ const catchAsync = require("../utils/catchAsync");
 const Widoczek = require("../models/Widoczek");
 const { widoczkiSchema, reviewSchema } = require("../schemas.js");
 const Review = require("../models/review");
-const {isLoggedIn} = require("../middleware/isLoggedIn");
-const {isAuthorizedWidoczek, isAuthorizedReview} = require("../middleware/isAuthorized");
+const { isLoggedIn } = require("../middleware/isLoggedIn");
+const ExpressError = require("../utils/ExpressError");
+const {
+  isAuthorizedWidoczek,
+  isAuthorizedReview,
+} = require("../middleware/isAuthorized");
 // const flash = require('connect-flash');
 // router.use(flash());
 
 //  -------- Joi Schema Validation ----------
-const valitateWidoczki = (req, res, next) => {
+const validateWidoczki = (req, res, next) => {
   const { error } = widoczkiSchema.validate(req.body);
   if (error) {
     const message = error.details.map((el) => el.message).join(",");
@@ -40,8 +44,15 @@ router.get(
 // ------------ HOME ---------------------------------
 router.get(
   "/widoczki/home",
+  isLoggedIn,
   catchAsync(async (req, res) => {
-    res.render("widoczki/home");
+    if (req.user) {
+      const widoczki = await Widoczek.find({ author: req.user.username });
+      res.render("widoczki/home", { widoczki });
+    } else {
+      req.flash("error", "Aby wyświetlić swoje widoczki, musisz się zalogować");
+      res.render("widoczki/login");
+    }
   })
 );
 
@@ -55,7 +66,7 @@ router.get(
 router.post(
   "/widoczki/new",
   isLoggedIn,
-  valitateWidoczki,
+  validateWidoczki,
   catchAsync(async (req, res) => {
     const widoczek = new Widoczek(req.body.widoczek);
     await widoczek.save();
@@ -93,6 +104,7 @@ router.get(
 // ------------ EDIT ROUTE----------------------------------
 router.get(
   "/widoczki/:id/edit",
+  isAuthorizedReview,
   catchAsync(async (req, res) => {
     const widoczek = await Widoczek.findById(req.params.id);
     if (!widoczek) {
@@ -106,7 +118,8 @@ router.get(
 router.put(
   "/widoczki/:id",
   isAuthorizedWidoczek,
-  valitateWidoczki,
+  isLoggedIn,
+  validateWidoczki,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const widoczek = await Widoczek.findByIdAndUpdate(id, {
@@ -118,6 +131,7 @@ router.put(
 // ------------ DELETE -----------------------------
 router.delete(
   "/widoczki/:id",
+  isAuthorizedWidoczek,
   catchAsync(async (req, res) => {
     const { id } = req.params;
 
@@ -129,6 +143,7 @@ router.delete(
 );
 router.delete(
   "/widoczki/:id/reviews/:reviewId",
+  isAuthorizedReview,
   catchAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     await Widoczek.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });

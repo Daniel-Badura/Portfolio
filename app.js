@@ -139,10 +139,8 @@ app.get(
 app.post(
   "/keynotes",
   catchAsync(async (req, res) => {
-    console.log(req.body.keynotes);
     const score = new Score(req.body.keynotes);
     await score.save();
-    console.log(recordedSequence);
     req.flash("success", "Zapisano");
     res.redirect('/keynotes');
   })

@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplateWidoczki') %>
 
-        <h1> Wszystkie Widoczki</h1>
+        <h1 id="widoczki-title"> Wszystkie Widoczki</h1>
 
         <div>
             <!-- <a href="/widoczki/new">Dodaj Widoczek</a> -->
@@ -9,18 +9,17 @@
         <% for (let widoczek of widoczki) {%>
             <div class="card">
                 <div class="row">
-                    <div class="col-md-4">
-                        <img class="img-fluid" style=" height: 300px;
-                        height: auto;" src="<%= widoczek.image %>">
+                    <div class="col-md-6">
+                        <img class="img" src="<%= widoczek.image %>">
 
                         </a>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <%= widoczek.name %>
                             </h5>
-                            <p class="card-text">
+                            <p class="card-text dancing-script">
                                 <%= widoczek.description %>
                             </p>
                             <p class="card-text">

@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplateWidoczki') %>
-    <div class="row">
-        <div class="col-6">
+    <div class="row show-card">
+        <div class="col-<% if(currentUser){ %><%=6%><% } else { %><%=6%><% } %>">
             <div class="card">
                 <img src="<%= widoczek.image %>" class="card-img-top" alt="../img/default.jpg">
                 <div class="card-body">
@@ -12,26 +12,29 @@
                     </p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><h5>
-                        <%= widoczek.location %></h5>
+                    <li class="list-group-item">
+                        <h6><em>Lokalizacja:</em></h6>
+
+                        <%= widoczek.location %>
+
                     </li>
                     <li class="list-group-item">
-                        <h6>Cena</h6>
+                        <h6><em>Cena:</em></h6>
                         <%= widoczek.price %>€ za jedno spojrzenie
                     </li>
                     <li class="list-group-item">
-                        <h6>Autor</h6>
-                        <%= widoczek.author %> 
+                        <h6><em>Autor</em></h6>
+                        <%= widoczek.author %>
                     </li>
                 </ul>
-                <% if(currentUser==widoczek.author) {%> 
-                <div class="card-body">
-                    <a class="card-link btn btn-info" href="/widoczki/<%= widoczek._id %>/edit">Edytuj Widoczek</a>
-                    <form class="d-inline" action="/widoczki/<%=widoczek._id%>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger ">Usuń Widoczek</button>
-                    </form>
-                </div>
-                <% } %> 
+                <% if(currentUser){if(currentUser.username==widoczek.author) {%>
+                    <div class="card-body">
+                        <a class="card-link btn btn-info" href="/widoczki/<%= widoczek._id %>/edit">Edytuj Widoczek</a>
+                        <form class="d-inline" action="/widoczki/<%=widoczek._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger ">Usuń Widoczek</button>
+                        </form>
+                    </div>
+                    <% }} %>
             </div>
 
 
@@ -51,7 +54,8 @@
                 <% if(currentUser){ %>
                     <div class="mb-3">
                         <label class="form-label" for="author">Zalogowany jako:</label>
-                        <input class="form-control disabled" type="text" id="author" name="review[author]" value='<%= currentUser.username %>' required readonly></input>
+                        <input class="form-control disabled" type="text" id="author" name="review[author]"
+                            value='<%= currentUser.username %>' required readonly></input>
                         <div class="valid-feedback green">
                             Dobrze!
                         </div>
@@ -59,35 +63,32 @@
                     <% } %>
 
 
-                <button id="review" type="submit" class='btn btn-success'>Dodaj Opinię</button>
+                        <button id="review" type="submit" class='btn btn-success'>Dodaj Opinię</button>
             </form>
 
             <% for (let review of widoczek.reviews){ %>
-               
-                
+
+
                 <div class="card review">
                     <div class="mb-3 card-body">
                         <div class="card-body">
-                            <h5 class="review-author"><%= review.author %></h5>
+                            <h5 class="review-author">
+                                <%= review.author %>
+                            </h5>
                             <h6>Ocena: <%= review.rating %>
                             </h6>
                         </div>
                         <div class="card-text review-text">
                             <%= review.body %>
                         </div>
-                        <% if(currentUser){if(currentUser.username== review.author) {%> 
-                        <div>
+                        <% if(currentUser){if(currentUser.username==review.author) {%>
                             <form action="/widoczki/<%= widoczek._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                method="POST">                                
-                                <button class=" btn btn-sm btn-danger removeReview"> Usuń Opinię </button>                            
+                                method="POST">
+                                <button class=" btn btn-sm btn-danger removeReview"> Usuń Opinię </button>
                             </form>
-                        </div>
-                        <% } %> 
+                            <% }} %>
                     </div>
                 </div>
-                <% }} %>
-
-
-
+                <% } %>
         </div>
     </div>
