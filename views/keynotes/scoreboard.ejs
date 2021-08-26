@@ -1,21 +1,22 @@
 <% layout('layouts/boilerplateKeynotes') %>
 
-        <h1> Tablica wyników </h1>
-       
+    <h1> Tablica wyników </h1>
 
+    <div class="scoreboard-page container">
         <% for (let score of scores) {%>
-            <div class="card container scores">
+            <div class="card scores">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-body">
                             <h3 class="card-title">
-                              <%= score.user %>
+                                <%= score.user %>
                             </h3>
                             <p class="card-text">
-                               wynik: <%= score.score %>
+                                wynik: <%= score.score %>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             <% }%>
+    </div>

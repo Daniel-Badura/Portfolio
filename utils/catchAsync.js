@@ -1,8 +1,6 @@
 /*jshint esversion: 9 */
-
-
-module.exports = func => {
+module.exports = catchAsync => {
     return (req, res, next) => {
-        func(req, res, next).catch(next);
+        catchAsync(req, res, next).catch(next);
     };
 };

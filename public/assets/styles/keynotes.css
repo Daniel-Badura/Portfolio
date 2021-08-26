@@ -199,3 +199,7 @@ ul li:last-child {
 .scores p{
   color:white;
 }
+
+.scoreboard-page{
+  padding-bottom:3rem;
+}

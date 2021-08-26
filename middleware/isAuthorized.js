@@ -21,15 +21,17 @@ module.exports.isAuthorizedWidoczek = async (req, res, next) => {
 
 module.exports.isAuthorizedReview = async (req, res, next) => {
   const { id, reviewId } = req.params;
-  console.log(req.params);
   const review = await Review.findById(reviewId);
-  console.log(review);
-
-  if (review.author.equals(req.user.username)) {
-    next();
+  if (req.user) {
+    if (review.author == req.user.username) {
+      next();
+    } else {
+      req.flash("error", "Nie masz tutaj dostępu");
+      return res.redirect(`/widoczki/${id}`);
+    }
   } else {
-    req.flash("error", "Nie masz tutaj dostępu");
-    return res.redirect(`/widoczki/${id}`);
+    req.flash("error", "Musisz się napierw zalogować");
+    return res.redirect('/login');
   }
 };
 module.exports.isAuthorizedEdit = async (req, res, next) => {
