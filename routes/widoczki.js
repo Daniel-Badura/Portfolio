@@ -3,9 +3,7 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const widoczki = require("../controllers/widoczki");
-const Widoczek = require("../models/Widoczek");
 const { widoczkiSchema, reviewSchema } = require("../schemas.js");
-const Review = require("../models/review");
 const { isLoggedIn } = require("../middleware/isLoggedIn");
 const ExpressError = require("../utils/ExpressError");
 const {
@@ -39,49 +37,38 @@ router.get("/widoczki", catchAsync(widoczki.wszystkieWidoczki));
 // ------------ Moje Widoczki -----------------------------------------------
 router.get("/widoczki/home", isLoggedIn, catchAsync(widoczki.mojeWidoczki));
 // ------------ Dodaj Widoczki GET ------------------------------------------
-router.get("/widoczki/new", catchAsync(widoczki.dodajWidoczekGet));
-// ------------ Dodaj Widoczki POST------------------------------------------
-router.post(
-  "/widoczki/new",
-  isLoggedIn,
-  validateWidoczki,
-  catchAsync(widoczki.dodajWidoczekPost)
-);
-// ------------ Dodaj Review-------------------------------------------------
-router.post(
-  "/widoczki/:id",
-  isLoggedIn,
-  valitateReview,
-  catchAsync(widoczki.dodajWidoczekReview)
-);
-// ------------ Wyświetl Widoczek -------------------------------------------
-router.get("/widoczki/:id", catchAsync(widoczki.showWidoczek));
+router.route("/widoczki/new")
+  .get(catchAsync(widoczki.dodajWidoczekGet))
+  // ------------ Dodaj Widoczki POST------------------------------------------
+  .post(isLoggedIn, validateWidoczki, catchAsync(widoczki.dodajWidoczekPost));
 // ------------ Edytuj Widoczek ---------------------------------------------
-router.get(
-  "/widoczki/:id/edit",
-  isAuthorizedReview,
-  catchAsync(widoczki.edytujWidoczekGet)
-);
-// ------------ EDIT PUT ----------------------------------------------------
-router.put(
-  "/widoczki/:id",
-  isLoggedIn,
-  isAuthorizedWidoczek,
-  validateWidoczki,
-  catchAsync(widoczki.edytujWidoczekPut)
-);
-// ------------- Usuń Widoczek  ---------------------------------------------
-router.delete(
-  "/widoczki/:id",
-  isLoggedIn,
-  isAuthorizedWidoczek,
-  catchAsync(widoczki.deleteWidoczek)
-);
+router
+  .route("/widoczki/:id/edit")
+  .get(isAuthorizedReview, catchAsync(widoczki.edytujWidoczekGet));
+// ------------ Wyświetl Widoczek -------------------------------------------
+
+router
+  .route("/widoczki/:id")
+  .get(catchAsync(widoczki.showWidoczek))
+  // ------------ EDIT PUT ----------------------------------------------------
+  .put(
+    isLoggedIn,
+    isAuthorizedWidoczek,
+    validateWidoczki,
+    catchAsync(widoczki.edytujWidoczekPut)
+  )
+  // ------------ Dodaj Review-------------------------------------------------
+  .post(isLoggedIn, valitateReview, catchAsync(widoczki.dodajWidoczekReview))
+  // ------------- Usuń Widoczek  ---------------------------------------------
+  .delete(
+    isLoggedIn,
+    isAuthorizedWidoczek,
+    catchAsync(widoczki.deleteWidoczek)
+  );
 // ------------- Usuń Widoczek Review ---------------------------------------
 router.delete(
   "/widoczki/:id/reviews/:reviewId",
   isAuthorizedReview,
   catchAsync(widoczki.deleteWidoczekReview)
 );
-
 module.exports = router;

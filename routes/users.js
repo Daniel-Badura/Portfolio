@@ -2,12 +2,16 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
-const {ifUserExists, ifEmailExists, validatePassword} = require("../middleware/registerValidation");
+const {
+  ifUserExists,
+  ifEmailExists,
+  validatePassword,
+} = require("../middleware/registerValidation");
 const catchAsync = require("../utils/catchAsync");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+const users = require("../controllers/users");
 router.use(cookieParser());
-
 
 // ------------------------LOGIN--------------------------------
 
@@ -21,28 +25,7 @@ router.post(
     failureRedirect: "/login",
     session: true,
   }),
-  (req, res) => {
-    req.flash("success", `Siema ${req.body.username}`);
-    let { returnAfterLogin } = req.cookies;
-    if (returnAfterLogin) {
-      res.clearCookie("returnAfterLogin");
-      res.redirect(returnAfterLogin);
-    } else {
-      res.redirect("/");
-    }
-    //   const { username, password } = req.body;
-    //   const user = await User.findOne({ username });
-    //   const validate = await bcrypt.compare(password, user.password);
-    //   if (validate) {
-    //     req.session.user_id = user._id;
-    //     req.flash("success", "Zalogowano pomyślnie");
-    //     res.redirect("/");
-    //   } else {
-    //     req.flash("error", "Nieprawidłowa nazwa użytkownika lub hasło");
-    //     res.redirect("/login");
-    //   }
-    // });
-  }
+  users.login
 );
 // -------------------REGISTER----------------------------
 
@@ -55,32 +38,8 @@ router.post(
   ifUserExists,
   ifEmailExists,
   validatePassword,
-  catchAsync(async (req, res) => {
-    try {
-      const { username, email, password } = req.body;
-      const user = new User({
-        username: username,
-        email: email,
-      });
-      const newUser = await User.register(user, password);
-      await user.save();
-      req.flash("success", `Pomyślnie zarejestrowano użytkownika ${username}`);
-      req.login(newUser, (err) => {
-        if (err) {
-          return next(err);
-        }
-        res.redirect("/");
-      });
-    } catch (err) {
-      req.flash("error", err.message);
-      res.redirect("/register");
-    }
-  })
+  catchAsync(users.register)
 );
 // ------------------------LOGOUT ----------------------------
-router.get("/logout", (req, res) => {
-  req.logout();
-  req.flash("success", "Wylogowano pomyślnie");
-  res.redirect("/");
-});
+router.get("/logout", users.logout);
 module.exports = router;

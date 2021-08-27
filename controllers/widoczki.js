@@ -15,24 +15,6 @@ const {
 // router.use(flash());
 
 //  -------- Joi Schema Validation ----------
-const validateWidoczki = (req, res, next) => {
-  const { error } = widoczkiSchema.validate(req.body);
-  if (error) {
-    const message = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(message, 400);
-  } else {
-    next();
-  }
-};
-const valitateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body);
-  if (error) {
-    const message = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(message, 400);
-  } else {
-    next();
-  }
-};
 module.exports.wszystkieWidoczki = async (req, res) => {
   const widoczki = await Widoczek.find({});
   res.render("widoczki/index", { widoczki });
