@@ -23,25 +23,22 @@ const User = require("./models/user");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const usersRoutes = require('./routes/users');
+const keynotesRoutes = require('./routes/keynotes');
+const templateRoutes = require('./routes/template');
+const calculatorRoutes = require('./routes/calculator');
+const moviesRoutes = require('./routes/movies');
 const Record = require("./models/recordings");
 const Score = require("./models/scores");
-
+const connectDB= require('./config/db');
 // ------------ CONNECT MONGOOSE ----------------------
 
 // --------------COOKIE PARSER ------------------------
 // app.use(cookieParser());
 // --------------------------------------
-mongoose.connect("mongodb://localhost:27017/portfolio", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
-});
+
 // ------------ EXPRESS SETUP -------------------------
+// Connect DB
+connectDB();
 const app = express();
 app.use("/public", express.static("public"));
 app.use(express.urlencoded({ extend: true }));
@@ -83,6 +80,10 @@ app.use((req, res, next) => {
 // -----------------ROUTES --------------------------
 app.use("/", widoczkiRoutes);
 app.use("/", usersRoutes);
+app.use("/", templateRoutes);
+app.use("/keynotes", keynotesRoutes);
+app.use("/", calculatorRoutes);
+app.use("/", moviesRoutes);
 
 //------------------PASSPORT--------------------------
 
@@ -112,49 +113,14 @@ app.get("/headers", function (req, res) {
   res.send(req.headers);
 });
 
-// ------------------CALCULATOR-------------------------------------
 
-app.get(
-  "/calculator",
-  catchAsync(async (req, res) => {
-    res.render("calculator/index", {});
-  })
-);
+// Movies
 
-// ------------------KEYNOTES-------------------------------------
-app.get(
-  "/keynotes",
-  catchAsync(async (req, res) => {
-    res.render("keynotes/index", {});
-  })
-);
-app.get(
-  "/keynotes/scoreboard",
-  
-  catchAsync(async (req, res) => {
-    const scores = await Score.find({}).sort({"score": -1});
-    res.render("keynotes/scoreboard", {scores});
-  })
-);
-app.post(
-  "/keynotes",
-  catchAsync(async (req, res) => {
-    const score = new Score(req.body.keynotes);
-    await score.save();
-    req.flash("success", "Zapisano");
-    res.redirect('/keynotes');
-  })
-);
-// ------------------TEMPLATE-------------------------------------
-app.get(
-  "/template",
-  catchAsync(async (req, res) => {
-    res.render("template/index", {});
-  })
-);
+app.get("/movies"),
+catchAsync(async (req,res)=> {
+  res.render("movies/index")
+});
 
-
-// ------------------------LOGIN--------------------------------
 
 // ------------------AUTH MIDDLEWARE --------------------------------
 const requireAuth = (req, res, next) => {

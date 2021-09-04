@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const WidoczekSchema = new Schema({
   name: String,
   image: String,
-  price: Number,
+  // price: Number,
   description: String,
   location: String,
   author: String,

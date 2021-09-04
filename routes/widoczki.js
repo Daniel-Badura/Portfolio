@@ -44,7 +44,7 @@ router.route("/widoczki/new")
 // ------------ Edytuj Widoczek ---------------------------------------------
 router
   .route("/widoczki/:id/edit")
-  .get(isAuthorizedReview, catchAsync(widoczki.edytujWidoczekGet));
+  .get(isAuthorizedWidoczek, catchAsync(widoczki.edytujWidoczekGet));
 // ------------ Wyświetl Widoczek -------------------------------------------
 
 router

@@ -289,7 +289,6 @@ function stopRecording() {
   // $("#play").removeClass("hide");
   $("#play-record").removeClass("hide");
   $("#back").removeClass("hide");
-  $("#save").removeClass("hide");
 }
 function startRecording() {
   $("#record").addClass("hide");

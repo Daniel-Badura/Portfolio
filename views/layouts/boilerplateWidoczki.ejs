@@ -17,7 +17,8 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="/public/assets/styles/widoczki.css" type="text/css">
+    <link rel="stylesheet" href="/public/assets/styles/widoczki.css" type="text/css">
+    <link rel="stylesheet" href="/public/assets/styles/stars.css" type="text/css">
     <script src="/public/assets/scripts/widoczki.js"></script>
 </head>
 
@@ -41,13 +42,15 @@
                 // Loop over them and prevent submission
                 Array.from(forms)
                     .forEach(function (form) {
-                        form.addEventListener('submit', function (event) {
-                            if (!form.checkValidity()) {
-                                event.preventDefault()
-                                event.stopPropagation()
-                            }
-                            form.classList.add('was-validated')
-                        }, false)
+                        if (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+                                form.classList.add('was-validated')
+                            }, false)
+                        }
                     })
             })()
         </script>

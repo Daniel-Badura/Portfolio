@@ -12,7 +12,6 @@ h1 {
 footer {
   color: white;
   font-family: sans-serif;
-  
 }
 
 .set {
@@ -20,7 +19,7 @@ footer {
 }
 
 .fluid {
-  padding:1% 25%;
+  padding: 1% 25%;
 }
 
 * {
@@ -82,7 +81,7 @@ ul .white:active {
 .volume {
   color: white;
   font-family: "Arvo", cursive;
-  margin:2%;
+  margin: 2%;
   padding: 2 15%;
 }
 
@@ -110,10 +109,10 @@ ul .white:active {
 .s, .h, .j, .l, .px, .d, .g, .px {
   margin: 0 0 0 -1em
 }
-.c{
+
+.c {
   margin: 0 0 0 0em
 }
-
 
 ul li:first-child {
   border-radius: 5px 0 5px 5px
@@ -125,24 +124,12 @@ ul li:last-child {
 
 .vol-control {
   color: white;
- 
 }
 
 .score {
   color: white;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  
-}
- 
-.scoreboard {
-  height: auto;
-  width:auto;
-  margin: 0 auto;
-  border-radius: 30%;
-  font-family: "Arvo", cursive;
-  font-size: 3rem;
-  padding-bottom:1rem;
 }
 
 /* .next-level {
@@ -173,7 +160,8 @@ ul li:last-child {
   background-color: #343a40;
   border-color: #343a40
 }
-.control-button{
+
+.control-button {
   height: 10rem;
   width: 10rem;
   margin: 0 auto;
@@ -181,25 +169,50 @@ ul li:last-child {
   font-family: "Arvo", cursive;
   font-size: 2rem;
   line-height: 2rem;
+  margin-left:1rem;
 }
 
-#save{
-  margin-bottom:5em;
-}
-#footer{
-  padding-top:0!important;
-  padding-bottom:0!important;
-}
-.scores{
-  background: linear-gradient(to bottom,#5e40c4,#04a330);
-}
-.scores h3{
-  color:violet
-}
-.scores p{
-  color:white;
+#save {
+  margin-bottom: 5em;
 }
 
-.scoreboard-page{
-  padding-bottom:3rem;
+#footer {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+
+.score {
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.scores {
+  background: linear-gradient(to bottom, #5e40c4, #04a330);
+}
+
+.scores h3 {
+  color: violet
+}
+
+.scores p {
+  color: white;
+}
+
+.scoreboard-page {
+  padding-bottom: 3rem;
+}
+
+.scoreboard {
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+  border-radius: 30%;
+  font-family: "Arvo", cursive;
+  font-size: 3rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.play{
+  display: flex;
 }

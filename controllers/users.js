@@ -1,4 +1,7 @@
 //jshint esversion: 11
+const User = require('../models/user');
+
+
 module.exports.register = async (req, res) => {
   try {
     const { username, email, password } = req.body;

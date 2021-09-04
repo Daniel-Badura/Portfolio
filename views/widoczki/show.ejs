@@ -2,7 +2,7 @@
     <div class="row show-card">
         <div class="col-<% if(currentUser){ %><%=6%><% } else { %><%=6%><% } %>">
             <div class="card">
-                <img src="<%= widoczek.image %>" class="card-img-top" alt="../img/default.jpg">
+                <img src="<%= widoczek.image %>" class="card-img-top" alt="Oops">
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= widoczek.name %>
@@ -18,14 +18,17 @@
                         <%= widoczek.location %>
 
                     </li>
-                    <li class="list-group-item">
-                        <h6><em>Cena:</em></h6>
-                        <%= widoczek.price %>€ za jedno spojrzenie
-                    </li>
+               
                     <li class="list-group-item">
                         <h6><em>Autor</em></h6>
                         <%= widoczek.author %>
                     </li>
+                    <% if (widoczek.reviews[0]){ let count =0; let sum=0; widoczek.reviews.forEach(element=>{return sum+=element.rating, count++;}); avgRating = sum/count; %> 
+                    <li class="list-group-item">
+                        <h6><em>Średnia Ocen:</em></h6>
+                        <%= avgRating.toFixed(2) %>
+                    </li>
+                    <% }%> 
                 </ul>
                 <% if(currentUser){if(currentUser.username==widoczek.author) {%>
                     <div class="card-body">
@@ -42,9 +45,27 @@
         <div class="col-6">
             <h2>Zostaw opinię:</h2>
             <form action="/widoczki/<%= widoczek._id %>" method="POST" novalidate class='validated-form'>
+
+
                 <div class='mb-3'>
-                    <label for="body" class="form-label">Ocena</label>
-                    <input name='review[rating]' id='rating' class='form-range' type="range" min='1' max='5'>
+                    <!-- starability -->
+                    <fieldset class="starability-growRotate ">
+                        <legend>Ocena:</legend>
+                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked
+                            aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                    <!--  -->
+                
                 </div>
                 <div class='mb-3'>
                     <label for="body" class="form-label">Opinia</label>
@@ -73,13 +94,17 @@
                     <div class="mb-3 card-body">
                         <div class="card-body">
                             <h5 class="review-author">
+
                                 <%= review.author %>
                             </h5>
-                            <h6>Ocena: <%= review.rating %>
-                            </h6>
+
+                            <p class="starability-result" data-rating="<%=review.rating %>"">
+                                Ocena: <%= review.rating %>
+                            </p>
+
                         </div>
-                        <div class="card-text review-text">
-                            <%= review.body %>
+                        <div class=" card-text review-text">
+                                <%= review.body %>
                         </div>
                         <% if(currentUser){if(currentUser.username==review.author) {%>
                             <form action="/widoczki/<%= widoczek._id %>/reviews/<%= review._id %>?_method=DELETE"

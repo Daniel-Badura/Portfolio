@@ -47,12 +47,13 @@ module.exports.dodajWidoczekReview = async (req, res) => {
   res.redirect(`/widoczki/${widoczek._id}`);
 };
 module.exports.showWidoczek = async (req, res) => {
+ 
   const widoczek = await Widoczek.findById(req.params.id).populate("reviews");
   if (!widoczek) {
     req.flash("error", "Nie udało się znaleźć widoczku");
     return res.redirect("/widoczki");
   }
-  res.render("widoczki/show", { widoczek });
+  res.render("widoczki/show", { widoczek});
 };
 module.exports.edytujWidoczekGet = async (req, res) => {
   const widoczek = await Widoczek.findById(req.params.id);
@@ -64,7 +65,9 @@ module.exports.edytujWidoczekGet = async (req, res) => {
 };
 module.exports.edytujWidoczekPut = async (req, res) => {
   const { id } = req.params;
+  console.log(req.user.username);
   const widoczek = await Widoczek.findByIdAndUpdate(id, {
+    author: req.user.username,
     ...req.body.widoczek,
   });
   res.redirect(`/widoczki/${widoczek._id}`);

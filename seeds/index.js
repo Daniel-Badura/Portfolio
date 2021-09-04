@@ -8,7 +8,8 @@ const cities = require("./cities");
 const widoczek = require("../models/Widoczek");
 const loremIpsum = require("lorem-ipsum").loremIpsum;
 
-mongoose.connect("mongodb://localhost:27017/portfolio", {
+// mongoose.connect("mongodb://localhost:27017/portfolio", {
+mongoose.connect("mongodb+srv://dandeusz:dandeusz@cluster0.3t3pj.mongodb.net/Portfolio?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -30,7 +31,7 @@ const seedDB = async () => {
       image: `/public/assets/images/${i}.jpg`,
       name: `${generatorNazw(opis)} ${generatorNazw(miejsce)}`,
       description: `${loremIpsum({ count: 10 })}`,
-      price: `${Math.floor(Math.random() * 15 + 5)}`,
+      // price: `${Math.floor(Math.random() * 15 + 5)}`,
       author: 'Daniel'
     });
     await widoczek.save();
