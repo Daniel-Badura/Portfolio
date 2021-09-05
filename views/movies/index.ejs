@@ -1,3 +1,11 @@
-<% layout('layouts/boilerplateCalculator') %>
+<% layout('layouts/boilerplateHome') %>
 
-Movies
+    <div class="container-fluid text-center">
+        <form id="movies-form" action="/movies/show" method="POST">
+            
+            <label for="search">Wprowadź nazwę filmu
+            </label>
+            <input type="text" name='search' id='search'>
+            <button class="btn btn-outline-light btn-info">Szukaj</button>
+        </form>
+    </div>

@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplateHome') %>
+
+    <div class="card container-flex">
+        <% for (let movie of movies.Search) {%>
+
+
+
+            <div class="col-md-6">
+                <img class="img" src="<%= movie.Poster %>">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= movie.Title %>
+                    </h5>
+
+                    </a>
+
+                </div>
+            </div>
+
+
+
+            <% } %>
+    </div>

@@ -5,7 +5,7 @@ const catchAsync = require("../utils/catchAsync");
 // ------------------CALCULATOR-------------------------------------
 
 router.get(
-  "/calculator",
+  "/",
   catchAsync(async (req, res) => {
     res.render("calculator/index", {});
   })

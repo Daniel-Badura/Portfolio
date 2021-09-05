@@ -82,8 +82,8 @@ app.use("/", widoczkiRoutes);
 app.use("/", usersRoutes);
 app.use("/", templateRoutes);
 app.use("/keynotes", keynotesRoutes);
-app.use("/", calculatorRoutes);
-app.use("/", moviesRoutes);
+app.use("/calculator", calculatorRoutes);
+app.use("/movies", moviesRoutes);
 
 //------------------PASSPORT--------------------------
 
@@ -114,12 +114,6 @@ app.get("/headers", function (req, res) {
 });
 
 
-// Movies
-
-app.get("/movies"),
-catchAsync(async (req,res)=> {
-  res.render("movies/index")
-});
 
 
 // ------------------AUTH MIDDLEWARE --------------------------------
@@ -137,10 +131,10 @@ app.get("/tajne", requireAuth, (req, res) => {
 });
 
 // ------------------EXPRESS ERROR-------------------------------------
-app.all("*", (req, res, next) => {
-  next(new ExpressError("Page Not Found", 404));
-});
-// ----------------NEXT-------------------------------
+// app.all("*", (req, res, next) => {
+//   next(new ExpressError("Page Not Found", 404));
+// });
+// // ----------------NEXT-------------------------------
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Kurka wodna..." } = err;
   res.status(statusCode).render("error", { err });
