@@ -1,20 +1,22 @@
 <% layout('layouts/boilerplateHome') %>
+    <div class="container">
 
-    <div class="card container-flex">
+
+        <h3 class="text-justify">Wyszukiwanie: <%= search %>
+        </h3>
+    </div>
+    <div class="row">
         <% for (let movie of movies.Search) {%>
 
-
-
-            <div class="col-md-6">
-                <img class="img" src="<%= movie.Poster %>">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <%= movie.Title %>
-                    </h5>
-
-                    </a>
-
-                </div>
+            <div class="col-3">
+                <a href="/movies/show/<%= movie.Title %>">
+                    <img class="img" src="<%= movie.Poster %>">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <%= movie.Title %>
+                        </h5>
+                    </div>
+                </a>
             </div>
 
 
