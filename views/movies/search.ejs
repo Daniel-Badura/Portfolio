@@ -1,16 +1,16 @@
 <% layout('layouts/boilerplateHome') %>
-    <div class="container">
+    <div class="container text-center">
 
 
-        <h3 class="text-justify">Wyszukiwanie: <%= search %>
+        <h3 class="text-center">Wyszukiwanie: <%= search %>
         </h3>
     </div>
-    <div class="row">
-        <% for (let movie of movies.Search) {%>
+    <div class="row movies-box">
+        <% if (movies.Search) {for (let movie of movies.Search) {%>
 
             <div class="col-3">
-                <a href="/movies/show/<%= movie.Title %>">
-                    <img class="img" src="<%= movie.Poster %>">
+                <a href="/movies/show/<%= movie.imdbID %>">                    
+            <% if(movie.Poster=="N/A"){ %> <img class="img" src="../../public//assets/images/Movies/movie-template.jpg"> <% } else { %> <img class="img" src="<%= movie.Poster %>"> <% } %> 
                     <div class="card-body">
                         <h5 class="card-title text-center">
                             <%= movie.Title %>
@@ -21,5 +21,12 @@
 
 
 
-            <% } %>
+            <% }} else { %>
+                <div class="container text-center"></div>
+                <h3 class="text-center ">Brak Wyników
+                </h3>
+                <h3 class="text-center "><a class='link-info' href="/movies">Powrót do wyszukiwania</a></h3>
+                    
+            </div>
+                <% }  %> 
     </div>

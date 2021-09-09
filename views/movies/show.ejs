@@ -1,8 +1,8 @@
 <% layout('layouts/boilerplateHome') %>
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center movies-box">
         <div class="col-12">
-            <img class="img" src="<%= movie.Poster %>">
+            <% if(movie.Poster=="N/A"){ %> <img class="img" src="../../public//assets/images/Movies/movie-template.jpg"> <% } else { %> <img class="img" src="<%= movie.Poster %>"> <% } %> 
             <div class="card-body">
                 <h5 class="card-title text-center">
                     <%= movie.Title %>
@@ -11,12 +11,15 @@
                 </div>
                 <div>Reżyser: <%= movie.Director %>
                 </div>
-                <div>Aktorzy: <% for(actor of movie.Actors) { %><%= actor %><% } %> 
+                <div>Aktorzy: <% for(actor of movie.Actors){%><%= actor %><% } %>
                 </div>
-                <div>Ocena IMDB: <%= movie.Ratings[0].Value %>
+                <div>Ocena IMDB: <%= movie.imdbRating %>
+                </div>
+                <div><a href="https://www.imdb.com/title/<%= movie.imdbID %>/">IMDB link</a>
                 </div>
             </div>
 
 
         </div>
+        <h3><a href="/movies">Powrót do wyszukiwania</a></h3>
     </div>

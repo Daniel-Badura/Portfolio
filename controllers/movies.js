@@ -8,7 +8,7 @@ function fetchMovies(title) {
 }
 function fetchMovie(title) {
   return axios
-    .get(`http://www.omdbapi.com/?apikey=f7196b6c&t=${title}`)
+    .get(`http://www.omdbapi.com/?apikey=f7196b6c&i=${title}`)
     .then((response) => response.data)
     .catch((err) => "error");
 }

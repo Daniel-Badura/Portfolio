@@ -1,7 +1,8 @@
+//jshint esversion:9
 const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
-
+const Score = require("../models/scores");
 
 
 router.get(

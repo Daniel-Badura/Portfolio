@@ -21,6 +21,8 @@
   color: gray;
   text-align: center;
 }
+
+
 .list-unstyled{
   font-size: 1.5rem;
   font-weight: 700;
@@ -45,4 +47,21 @@ h1{
 }
 #name-tag{
   color:yellow;
+}
+.movies-box{
+  padding-bottom: 8rem;
+}
+.project-list{
+
+}
+.project-cards{
+  font-family: 'Monsterrat', sans-serif;
+  font-size: 2rem;
+}
+.project-cards .card-title{
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  color:red
 }
