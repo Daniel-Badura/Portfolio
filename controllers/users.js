@@ -25,7 +25,7 @@ module.exports.register = async (req, res) => {
 };
 
 module.exports.login = (req, res) => {
-  req.flash("success", `Siema ${req.body.username}`);
+  req.flash("success", `Witaj ${req.body.username}`);
   let { returnAfterLogin } = req.cookies;
   if (returnAfterLogin) {
     res.clearCookie("returnAfterLogin");

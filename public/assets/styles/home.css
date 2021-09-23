@@ -14,7 +14,7 @@
   text-align: center;
 }
 .footer {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -61,7 +61,20 @@ h1{
 .project-cards .card-title{
   padding: .75rem 1.25rem;
   margin-bottom: 0;
+  margin-top: 0;
   background-color: rgba(0,0,0,.03);
-  border-bottom: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0,0,0,.125);
   color:red
+}
+.monsterrat {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem
+}
+.bebas-neue {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.3rem
+}
+.page-container {
+  position: relative;
+  min-height: 100vh;
 }

@@ -138,3 +138,14 @@ img {
   max-height: 100%;
   box-shadow: 0 0px 8px 0 rgb(170, 229, 250), 0 6px 20px 0 rgb(170, 229, 250);
 }
+.page-container {
+  position: relative;
+  min-height: 100;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  height: 1rem;            /* Footer height */
+}
