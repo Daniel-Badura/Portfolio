@@ -140,6 +140,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 // ------------ APP START -----------------------------
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Started on port 3000");
 });
