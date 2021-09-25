@@ -4,7 +4,7 @@
   "description": "portfolio project",
   "main": "app.js",
   "scripts": {
-    "start": "app.s",
+    "start": "app.js",
     "test": "jest"
   },
   "keywords": [
