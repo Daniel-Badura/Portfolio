@@ -14,6 +14,9 @@
                     <div class="valid-feedback green">
                         Dobrze!
                     </div>
+                    <div class="invalid-feedback green">
+                        Pole wymagane
+                    </div>
                 </div>
                 <div class="valid-feedback green">
                     Dobrze!
@@ -26,6 +29,9 @@
                     <div class="valid-feedback green">
                         Dobrze!
                     </div>
+                    <div class="invalid-feedback green">
+                        Pole wymagane
+                    </div>
                 </div>
                 <!-- ADRES -->
                 <div class="mb-3">
@@ -33,6 +39,9 @@
                     <input class="form-control" type="text" id="image" name="widoczek[image]" required>
                     <div class="valid-feedback green">
                         Dobrze!
+                    </div>
+                    <div class="invalid-feedback green">
+                        Pole wymagane
                     </div>
                 </div>
                 <!-- CENA -->
@@ -52,13 +61,20 @@
                     <div class="valid-feedback green">
                         Dobrze!
                     </div>
+                    <div class="invalid-feedback green">
+                        Pole wymagane
+                    </div>
                 </div>
                 <% if(currentUser){ %>
                     <div class="mb-3">
                         <label class="form-label" for="author">Autor</label>
-                        <input class="form-control disabled" type="text" id="author" name="widoczek[author]" value='<%= currentUser.username %>' required readonly></input>
+                        <input class="form-control disabled" type="text" id="author" name="widoczek[author]"
+                            value='<%= currentUser.username %>' required readonly></input>
                         <div class="valid-feedback green">
                             Dobrze!
+                        </div>
+                        <div class="invalid-feedback green">
+                            Pole wymagane
                         </div>
                     </div>
                     <% } %>

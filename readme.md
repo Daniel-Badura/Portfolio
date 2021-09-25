@@ -10,3 +10,7 @@ Keynotes - Wirtualne klawisze
 Kalkulator - Ręcznie robiony kalkulator
 Templata - Templata strony internetowej
 WWFDB - Wyszukiwarka filmowa
+
+Aby uruchomić projekt należy pobrać i zainstalować aktualną wersję nodejs ze strony https://nodejs.org/en/download/
+Następnie uruchomić konsolę i z poziomu pobranego katalogu /Portfolio w którym znajduje się plik package.json wywołać komentę "npm install"
+Po zakończeniu instalacji pakietów należy wywołać komentę node app.js która uruchomi server na porcie 3000

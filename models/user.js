@@ -17,10 +17,7 @@ const UserSchema = new Schema({
     recordings: [{
         type: Array,
     }
-    ],
-    score:{
-        type:Number
-    }
+    ]
     
     // password: {
     //     type: String,
