@@ -1,78 +1,73 @@
 .flame-text {
-  background-image: linear-gradient(to left,  orange, red);
+  background-image: linear-gradient(to left, orange, red);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.body{
+.body {
   text-align: center;
   display: flex;
 }
-.main-container{
+.main-container {
   padding: 5% 15%;
   margin: auto;
   text-align: center;
 }
 .footer {
-  position: absolute;
-  left: 0;
+  position: fixed;
   bottom: 0;
-  width: 100%;
   color: gray;
   text-align: center;
 }
 
-
-.list-unstyled{
+.list-unstyled {
   font-size: 1.5rem;
   font-weight: 700;
 }
-h1{
+h1 {
   font-size: 3rem;
   color: black;
 }
-.navbar{
-  margin-bottom:1rem;
+.navbar {
+  margin-bottom: 1rem;
 }
-.nav-link:hover{
+.nav-link:hover {
   transition: 1s;
-  color:white;
+  color: white;
   transform: scale(110%);
 }
-.navbar-brand:hover{
+.navbar-brand:hover {
   transition: 1s;
-  color:white;
+  color: white;
   transform: scale(110%);
-  
 }
-#name-tag{
-  color:yellow;
+#name-tag {
+  color: yellow;
 }
-.movies-box{
+.movies-box {
   padding-bottom: 8rem;
 }
-.project-list{
-
+.project-list {
 }
-.project-cards{
+.project-cards {
   font-family: 'Monsterrat', sans-serif;
   font-size: 2rem;
 }
-.project-cards .card-title{
-  padding: .75rem 1.25rem;
+.project-cards .card-title {
+  padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   margin-top: 0;
-  background-color: rgba(0,0,0,.03);
-  border: 1px solid rgba(0,0,0,.125);
-  color:red
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: red;
 }
 .monsterrat {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2rem
+  font-size: 2rem;
 }
 .bebas-neue {
   font-family: 'Bebas Neue', cursive;
-  font-size: 2.3rem
+  font-size: 2.3rem;
 }
 .page-container {
   position: relative;
