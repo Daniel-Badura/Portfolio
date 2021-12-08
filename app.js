@@ -29,7 +29,8 @@ const calculatorRoutes = require('./routes/calculator');
 const moviesRoutes = require('./routes/movies');
 const Record = require("./models/recordings");
 const Score = require("./models/scores");
-const connectDB= require('./config/db');
+const connectDB = require('./config/db');
+require('dotenv').config({ path: './config/config.env' })
 // ------------ CONNECT MONGOOSE ----------------------
 
 // --------------COOKIE PARSER ------------------------
@@ -140,6 +141,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 // ------------ APP START -----------------------------
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Started on port 3000");
+let port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Started on port ${port}`);
 });
