@@ -28,5 +28,4 @@ test('Fetch "http://www.omdbapi.com/?apikey=f7196b6c&s=Batman" returns a respons
         expect(data.Response).toEqual("True");
     });
 });
-mongoose.connection.close()
 
