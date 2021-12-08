@@ -12,7 +12,7 @@ function fetchMovie(title) {
     .then((response) => response.data)
     .catch((err) => "error");
 }
-
+module.exports = { fetchMovie, fetchMovies };
 module.exports.showMovies = async (req, res) => {
   const search = req.body.search;
   let movies = await fetchMovies(search);
