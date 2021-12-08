@@ -141,7 +141,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 // ------------ APP START -----------------------------
-let port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Started on port ${port}`);
+let PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Started on PORT ${PORT}`);
 });
+console.log(process.env.MONGODB_URI)

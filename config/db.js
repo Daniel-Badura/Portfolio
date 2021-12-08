@@ -1,10 +1,10 @@
 // jshint esversion: 9
 const mongoose = require('mongoose');
-
+require('dotenv').config({ path: './config/config.env' })
 
 const dburl =
-  process.env.MONGO_URL || "mongodb+srv://dandeusz:dandeusz@cluster0.3t3pj.mongodb.net/Portfolio?retryWrites=true&w=majoritya";
-const dburl2 = process.env.MONGO_URL || "mongodb://localhost:27017/portfolio";
+  process.env.MONGODB_URI || "mongodb://localhost:27017/portfolio";
+const dburl2 = process.env.MONGODB_URI || "mongodb://localhost:27017/portfolio";
 const connectDB = async () => {
   const conn = await mongoose.connect(dburl, {
     useNewUrlParser: true,
