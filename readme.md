@@ -9,12 +9,14 @@ W aktualnej wersji dostępne projekty to:
 
 ## Keynotes - Wirtualne klawisze
 
-## Kalkulator - Ręcznie robiony kalkulator
+## WWFDB - Wyszukiwarka filmowa
+
+## Github Lens - Wyszukiwarka użytkowników Github
 
 ## Templata - Templata strony internetowej
 
-## WWFDB - Wyszukiwarka filmowa
+## Kalkulator - Ręcznie robiony kalkulator
 
 Aby uruchomić projekt należy pobrać i zainstalować aktualną wersję nodejs ze strony https://nodejs.org/en/download/
 Następnie uruchomić konsolę i z poziomu pobranego katalogu /Portfolio w którym znajduje się plik package.json wywołać komendę "npm install"
-Po zakończeniu instalacji pakietów należy wywołać komentę node app.js która uruchomi server na porcie 4000
+Po zakończeniu instalacji pakietów należy wywołać komentę node app.js która uruchomi server na porcie 3000
