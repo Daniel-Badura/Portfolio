@@ -99,7 +99,6 @@ User.createStrategy();
 
 // -----------------RENDER HOMEPAGE-------------------
 app.get("/", (req, res) => {
-  console.log(projects[0].repo);
   res.render("portfolio", { projects });
 });
 // ------------ NEW -----------------------------------
