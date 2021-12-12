@@ -30,7 +30,8 @@ const moviesRoutes = require('./routes/movies');
 const Record = require("./models/recordings");
 const Score = require("./models/scores");
 const connectDB = require('./config/db');
-require('dotenv').config({ path: './config/config.env' })
+require('dotenv').config({ path: './config/config.env' });
+const { projects } = require('./seeds/projects');
 // ------------ CONNECT MONGOOSE ----------------------
 
 // --------------COOKIE PARSER ------------------------
@@ -98,7 +99,8 @@ User.createStrategy();
 
 // -----------------RENDER HOMEPAGE-------------------
 app.get("/", (req, res) => {
-  res.render("portfolio");
+  console.log(projects[0].repo);
+  res.render("portfolio", { projects });
 });
 // ------------ NEW -----------------------------------
 app.get("/viewcount", function (req, res) {

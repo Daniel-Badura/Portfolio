@@ -1,57 +1,41 @@
 <% layout('layouts/boilerplateHome') %>
-    <div class="main-container monsterrat ">
-        <h1 class="flame-text">Daniel Badura</h1>
-        <div class="row text-start">
-            <div class='card col-6 project-cards'>
-                <div class='card-title bebas-neue'>
-                    <a class='link-info' href="/widoczki">Widoczki</a>
-                </div>
-                <div class="card-body monsterrat ">
-                    Strona z ładnymi widoczkami
-                </div>
+    <div class="text-center container-main monsterrat ">
+        <br />
+        <h1 class="flame-text home-header">Daniel Badura Portfolio</h1>
+        <br />
+        <br />
+        <div class="text-start">
 
-            </div>
-            <div class='card col-6 project-cards'>
-                <div class='card-title bebas-neue'>
-                    <a class='link-info' href="/keynotes/">Keynotes</a>
+            <% for (let element of projects) { %>
+                <div class="card text-center hajlajt">
+                    <div class="card-header" style='color:white; background-color: #3e4852;'><strong>
+                            <%= element.name %>
+                        </strong>
+                    </div>
+                    <div class="card-body">
+                        <% if(element.repo){ %>
+                            <h5 class="card-title">
+                                <a href="<%= element.repo %>">
+                                    github repo
+                                </a>
+                            </h5>
+                            <% } %>
+                                <p class="card-text">
+                                    <%= element.description %>
+                                </p>
+                                <a href="<%= element.href %>"
+                                    class="btn btn-success btn-lg zobacz"><strong>Zobacz</strong></a>
+                                <p></p>
+                    </div>
                 </div>
-                <div class="card-body monsterrat">
-                    Wirtualne klawisze
-                </div>
-            </div>
-            <div class='card col-6 project-cards'>
-                <div class='card-title  bebas-neue'>
-                    <a class='link-info' href="/movies">WWFDB</a>
-                </div>
-                <div class="card-body monsterrat">
-                    Wyszukiwarka filmowa
-                </div>
-            </div>
-            <div class='card col-6 project-cards'>
-                <div class='card-title bebas-neue'>
-                    <a class='link-info' href="/template">Templata</a>
-                </div>
-                <div class="card-body monsterrat">
-                    Templata strony internetowej
-                </div>
-            </div>
-            <div class='card col-6 project-cards'>
-                <div class='card-title bebas-neue'>
-                    <a class='link-info' href="https://github-lens.herokuapp.com/">Github Lens</a>
-                </div>
-                <div class="card-body monsterrat">
-                    Wyszukiwarka użytkowników Github
-                </div>
-            </div>
-            <div class='card col-6 project-cards'>
-                <div class='card-title bebas-neue'>
-                    <a class='link-info' href="/calculator">Kalkulator</a>
-                </div>
-                <div class="card-body monsterrat">
-                    Ręcznie robiony kalkulator
-                </div>
-            </div>
+                <br />
+                <p></p>
+
+                <% }%>
 
 
         </div>
+
+
+
     </div>

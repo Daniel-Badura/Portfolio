@@ -4,10 +4,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.body {
-  text-align: center;
-  display: flex;
-}
+
 .main-container {
   padding: 5% 15%;
   margin: auto;
@@ -47,20 +44,7 @@ h1 {
 .movies-box {
   padding-bottom: 8rem;
 }
-.project-list {
-}
-.project-cards {
-  font-family: 'Monsterrat', sans-serif;
-  font-size: 2rem;
-}
-.project-cards .card-title {
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 0;
-  margin-top: 0;
-  background-color: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  color: red;
-}
+
 .monsterrat {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
@@ -72,4 +56,29 @@ h1 {
 .page-container {
   position: relative;
   min-height: 100vh;
+}
+.hajlajt:hover {
+  transition: 800ms;
+  transform: scale(105%);
+  background-color: rgb(255, 115, 0);
+}
+.zobacz:hover {
+  transition: 800ms;
+  color: #198754;
+  transform: scale(105%);
+  background-color: white;
+}
+.zobacz {
+  transition: 800ms;
+  color: white;
+  transform: scale(100%);
+  background-color: 198754;
+}
+.hajlajt {
+  transition: 800ms;
+  transform: scale(100%);
+  background-color: white;
+}
+.home-header {
+  font-size: 4rem;
 }
