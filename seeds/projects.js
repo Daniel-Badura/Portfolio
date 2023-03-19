@@ -1,16 +1,24 @@
 module.exports.projects = [
   {
+    "name": "WebSklep",
+    "href": "https://websklep.herokuapp.com/",
+    "repo": "https://github.com/Daniel-Badura/websklep",
+    "description": "Sklep internetowy - MERN stack",
+    "color": "orange"
+  },
+
+  {
     "name": "Github Lens",
     "href": "https://github-lens.herokuapp.com/",
     "repo": "https://github.com/Daniel-Badura/Github-Lens",
-    "description": "Wyszukiwarka użytkowników Github",
+    "description": "Wyszukiwarka użytkowników Github - MERN stack",
     "color": "green"
   },
   {
     "name": "Widoczki",
     "href": "/widoczki",
     "repo": "https://github.com/Daniel-Badura/Portfolio",
-    "description": "Strona z ładnymi widoczkami",
+    "description": "Strona z ładnymi widoczkami - Express/EJS/MongoDB",
     "color": "teal"
   },
   {
@@ -22,7 +30,7 @@ module.exports.projects = [
   {
     "name": "Keynotes",
     "href": "/keynotes",
-    "description": "Wirtualne klawisze",
+    "description": "Wirtualne klawisze - Pure JS",
     "color": "teal"
   },
 
