@@ -13,7 +13,7 @@ jobs:
           name: Run tests
           command: npm test
 workflows:
-  sample:
+  build-and-test:
     jobs:
       - node/test
   heroku_deploy:
