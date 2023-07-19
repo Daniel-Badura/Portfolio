@@ -4,46 +4,40 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-// const Widoczek = require("./models/Widoczek");
-// const Review = require("./models/review");
-// const { opis, miejsce } = require('./seeds/seedWidoczki');
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
-// const Joi = require("joi");
-// const { widoczkiSchema, reviewSchema } = require("./schemas.js");
 const widoczkiRoutes = require("./routes/widoczki");
-const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
-// const bcrypt = require("bcrypt");
 const User = require("./models/user");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const usersRoutes = require('./routes/users');
-const keynotesRoutes = require('./routes/keynotes');
-const templateRoutes = require('./routes/template');
-const calculatorRoutes = require('./routes/calculator');
-const moviesRoutes = require('./routes/movies');
+const usersRoutes = require("./routes/users");
+const keynotesRoutes = require("./routes/keynotes");
+const templateRoutes = require("./routes/template");
+const calculatorRoutes = require("./routes/calculator");
+const moviesRoutes = require("./routes/movies");
 const Record = require("./models/recordings");
 const Score = require("./models/scores");
-const connectDB = require('./config/db');
-require('dotenv').config({ path: './config/config.env' });
-const { projects } = require('./seeds/projects');
+const connectDB = require("./config/db");
+const dotenv = require("dotenv");
+const { projects } = require("./seeds/projects");
 // ------------ CONNECT MONGOOSE ----------------------
 
-// --------------COOKIE PARSER ------------------------
-// app.use(cookieParser());
+// -------------- PARSER ------------------------
+
 // --------------------------------------
 
 // ------------ EXPRESS SETUP -------------------------
 // Connect DB
+dotenv.config();
+console.log(process.env.MONGO_URI);
 connectDB();
 const app = express();
 app.use("/public", express.static("public"));
-app.use(express.urlencoded({ extend: true }));
 // --------------------EJS----------------------------
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
@@ -53,7 +47,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(morgan("common"));
 // ------------ METHOD OVERRIDE -----------------------
 app.use(methodOverride("_method"));
-
 
 //////////////////////////
 const sessionConfig = {
@@ -115,9 +108,6 @@ app.get("/headers", function (req, res) {
   res.send(req.headers);
 });
 
-
-
-
 // ------------------AUTH MIDDLEWARE --------------------------------
 const requireAuth = (req, res, next) => {
   if (!req.session.user_id) {
@@ -132,10 +122,6 @@ app.get("/tajne", requireAuth, (req, res) => {
   res.send("Widzisz mnie bo jesteś zalogowany");
 });
 
-// ------------------EXPRESS ERROR-------------------------------------
-// app.all("*", (req, res, next) => {
-//   next(new ExpressError("Page Not Found", 404));
-// });
 // // ----------------NEXT-------------------------------
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Kurka wodna..." } = err;
