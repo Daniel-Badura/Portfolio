@@ -1,7 +1,7 @@
 module.exports.projects = [
   {
     name: "Testowo",
-    href: "https://testowo-555445a60efa.herokuapp.com/",
+    href: "https://www.testwowo.com/",
     repo: "https://github.com/Daniel-Badura/testowo",
     description: "Aplikacja do tworzenia testów online - MERN stack",
     color: "orange",
