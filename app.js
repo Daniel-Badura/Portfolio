@@ -25,11 +25,8 @@ const Score = require("./models/scores");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const { projects } = require("./seeds/projects");
+const bodyParser = require("body-parser");
 // ------------ CONNECT MONGOOSE ----------------------
-
-// -------------- PARSER ------------------------
-
-// --------------------------------------
 
 // ------------ EXPRESS SETUP -------------------------
 // Connect DB
@@ -48,6 +45,14 @@ app.use(morgan("common"));
 // ------------ METHOD OVERRIDE -----------------------
 app.use(methodOverride("_method"));
 
+// -------------- PARSER ------------------------
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+// --------------------------------------
 //////////////////////////
 const sessionConfig = {
   secret: "this is going to be a secret",
