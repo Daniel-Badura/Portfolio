@@ -14,7 +14,7 @@ function fetchMovie(title) {
 }
 module.exports = { fetchMovie, fetchMovies };
 module.exports.showMovies = async (req, res) => {
-  const search = req.body.search;
+  const search = req.body?.search;
   let movies = await fetchMovies(search);
   res.render("movies/search", { movies, search });
   //   res.send(movies);
