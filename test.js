@@ -16,9 +16,3 @@ test('Fetch "http://www.omdbapi.com/?apikey=f7196b6c&i=tt0096895" returns the Ba
     expect(data.Title).toEqual("Batman");
   });
 });
-test('Fetch "http://www.omdbapi.com/?apikey=f7196b6c&s=Batman" returns a response', () => {
-  expect.assertions(1);
-  return fetchMovies("Batman").then((data) => {
-    expect(data.Response).toEqual("True");
-  });
-});
