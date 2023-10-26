@@ -1,5 +1,12 @@
 module.exports.projects = [
   {
+    name: "Portfolio v2",
+    href: "https://www.daniel-badura.com/",
+    repo: "https://github.com/Daniel-Badura/portfoliov2",
+    description: "Nowy projekt Portfolio - Mongo Express React Typescript Node",
+    color: "orange",
+  },
+  {
     name: "Testowo",
     href: "https://www.testwowo.com/",
     repo: "https://github.com/Daniel-Badura/testowo",

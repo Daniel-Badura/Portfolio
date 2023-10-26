@@ -5,17 +5,17 @@ W panelu głównym znajduje się możliwość rejestracji/logowania użytkownika
 
 W aktualnej wersji dostępne projekty to:
 
+## Websklep - Sklep internetowy
+
+## Testwowo - Aplikacja do tworzenia testów online
+
+## Github Lens - Wyszukiwarka użytkowników Github
+
 ## Widoczki - Strona z ładnymi widoczkami
 
 ## Keynotes - Wirtualne klawisze
 
 ## WWFDB - Wyszukiwarka filmowa
-
-## Github Lens - Wyszukiwarka użytkowników Github
-
-## Templata - Templata strony internetowej
-
-## Kalkulator - Ręcznie robiony kalkulator
 
 Aby uruchomić projekt należy pobrać i zainstalować aktualną wersję nodejs ze strony https://nodejs.org/en/download/
 Następnie uruchomić konsolę i z poziomu pobranego katalogu /Portfolio w którym znajduje się plik package.json wywołać komendę "npm install"
